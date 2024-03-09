@@ -1,15 +1,15 @@
 import {Button} from "@/components/ui/button.tsx";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@/state/store.ts";
-import {setTheme, TypeThemeColorState} from "@/state/theme/themeSlice.ts";
+import {AppDispatch, RootState} from "@/state/store.ts";
+import {toggleThemeColor} from "@/state/theme/themeColorSlice";
 import {TypeThemeColor} from "@/types.ts";
 
 
 function ChangeThemeButton() {
     const themeColor: TypeThemeColor = useSelector((state: RootState) => state.theme.themeColor);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     return (
-        <Button onClick={() => dispatch(setTheme.setTheme())}>Change the theme</Button>
+        <Button className={themeColor} onClick={() => dispatch(toggleThemeColor())}>Change the theme</Button>
     );
 }
 
