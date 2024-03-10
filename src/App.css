@@ -1,6 +1,182 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
 }
+*:before, *:after {
+  box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a {
+  text-decoration: none;
+}
+a:visited, a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+input[type=button], input[type=submit] {
+  cursor: pointer;
+}
+
+body {
+  flex: 1 0 2000px;
+}
+
+#root, .wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.wrapper {
+  transition: 0.15s;
+}
+.wrapper.dark {
+  background: #2B323B;
+}
+.wrapper.light {
+  background: #EBFFEB;
+}
+
+.notes-container {
+  display: grid;
+  padding: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+@media (max-width: 1920px) {
+  .notes-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 1024px) {
+  .notes-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .notes-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.note {
+  font-family: system-ui, sans-serif;
+  border-radius: 10px;
+  color: white;
+  padding: 8px 10px;
+  overflow: hidden;
+  transition: 0.15s;
+}
+.note__title {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 1.2;
+  height: 24px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  text-overflow: ellipsis;
+}
+.note__description {
+  font-size: 16px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  text-overflow: ellipsis;
+  flex: 1 0 100%;
+}
+.note__expiresAt {
+  font-size: 16px;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+.note:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+.note.dark {
+  background: #363546;
+}
+.note.dark > .note__title {
+  color: white;
+}
+.note.dark > .note__description {
+  color: white;
+}
+.note.dark > .note__expiresAt {
+  color: #FF6B6B;
+}
+.note.dark:hover {
+  background: #3F3D51;
+}
+.note.light {
+  background: #F7E5B6;
+}
+.note.light > .note__title {
+  color: #2B323B;
+}
+.note.light > .note__description {
+  color: #2B323B;
+}
+.note.light > .note__expiresAt {
+  color: #FF6B6B;
+}
+.note.light:hover {
+  background: #F5DEA3;
+}/*# sourceMappingURL=App.css.map */
