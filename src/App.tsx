@@ -14,7 +14,7 @@ function App() {
         {
             title: "Note111111111111111111111111111111111",
             description: "this is description for note1adaaa  aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            expiresAt: "2023"
+            expiresAt: "aboba"
         },
         {
             title: "note2",
@@ -27,7 +27,7 @@ function App() {
     )
     return (
         <div className={'wrapper ' + themeColor}>
-            <header className='flex justify-between py-3 px-6'>
+            <header className={'flex justify-between py-3 px-6 ' + themeColor}>
                 <ChangeThemeButton/>
                 <Avatar className={"avatar w-12 h-12 overflow-hidden cursor-pointer " + themeColor}>
                     <AvatarImage alt='avatar'/>
