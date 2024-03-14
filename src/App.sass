@@ -26,8 +26,13 @@ header
     border-bottom-color: $border-color-light
 
 .theme-image
-  width: 40px
-  height: 40px
+  object-fit: fill
+  &.dark
+    width: 32px
+    height: 32px
+  &.light
+    width: 40px
+    height: 40px
 
 .avatar
   border-radius: 50%

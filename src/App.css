@@ -101,6 +101,14 @@ header.light {
 }
 
 .theme-image {
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+.theme-image.dark {
+  width: 32px;
+  height: 32px;
+}
+.theme-image.light {
   width: 40px;
   height: 40px;
 }

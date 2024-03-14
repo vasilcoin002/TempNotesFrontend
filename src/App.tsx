@@ -29,7 +29,7 @@ function App() {
         <div className={'wrapper ' + themeColor}>
             <header className={'flex justify-between py-3 px-6 ' + themeColor}>
                 <ChangeThemeButton/>
-                <Avatar className={"avatar w-12 h-12 overflow-hidden cursor-pointer " + themeColor}>
+                <Avatar className={"avatar w-[40px] h-[40px] overflow-hidden cursor-pointer " + themeColor}>
                     <AvatarImage alt='avatar'/>
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
