@@ -6,6 +6,8 @@ import ChangeThemeButton from './components/ui/changeThemeButton';
 import { useSelector } from 'react-redux';
 import { RootState } from './state/store';
 import NotesContainer from './components/NotesContainer';
+import { Avatar } from '@radix-ui/react-avatar';
+import { AvatarFallback, AvatarImage } from './components/ui/avatar';
 
 function App() {
     const [notes, setNotes] = useState<TypeNote[]>([
@@ -25,8 +27,12 @@ function App() {
     )
     return (
         <div className={'wrapper ' + themeColor}>
-            <header>
+            <header className='flex justify-between py-3 px-6'>
                 <ChangeThemeButton/>
+                <Avatar className={"avatar w-12 h-12 overflow-hidden cursor-pointer " + themeColor}>
+                    <AvatarImage alt='avatar'/>
+                    <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
             </header>
             <main>
                 <NotesContainer notes={notes}/>

@@ -1,5 +1,7 @@
 @import nullstyle
 
+$border-color-light: #e0e0e0
+
 body
   flex: 1 0 2000px
 
@@ -12,7 +14,20 @@ body
   &.dark
     background: #2B323B
   &.light
-    background: #EBFFEB
+    background: #FFF
+
+header
+  min-height: 50px
+  border-bottom: 1px solid $border-color-light
+
+.theme-image
+  width: 40px
+  height: 40px
+
+.avatar
+  border-radius: 50%
+  &.dark
+    color: #FFF
 
 .notes-container
   display: grid
@@ -58,7 +73,7 @@ body
     margin-bottom: 5px
     font-weight: 700
   &:hover
-    transform: scale(1.02)
+    // transform: scale(1.02)
     cursor: pointer
   &.dark
     background: #363546
@@ -71,7 +86,7 @@ body
     &:hover
       background: #3F3D51
   &.light
-    background: #F7E5B6
+    border: 1px solid $border-color-light
     & > .note__title
       color: #2B323B
     & > .note__description
@@ -79,4 +94,4 @@ body
     & > .note__expiresAt
       color: #FF6B6B
     &:hover
-      background: #F5DEA3
+      box-shadow: 0 0 10px rgba(0,0,0,.15)

@@ -1,7 +1,6 @@
 import { RootState } from '@/state/store';
 import { TypeNote } from '@/types';
 import { useSelector } from 'react-redux';
-import { Separator } from './ui/separator';
 
 
 export function Note ({title, description, expiresAt}: TypeNote) {

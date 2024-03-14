@@ -9,7 +9,14 @@ function ChangeThemeButton() {
     const themeColor: TypeThemeColor = useSelector((state: RootState) => state.theme.themeColor);
     const dispatch = useDispatch<AppDispatch>();
     return (
-        <Button className={themeColor} onClick={() => dispatch(toggleThemeColor())}>Change the theme</Button>
+        <div className="cursor-pointer" onClick={() => dispatch(toggleThemeColor())}>
+        {
+            {
+                dark: <img className="theme-image" src="moon.png" alt="switch to light theme" />,
+                light: <img className="theme-image" src="sun.png" alt="switch to dark theme" />
+            }[themeColor]
+        }
+        </div>
     );
 }
 
