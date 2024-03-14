@@ -11,6 +11,7 @@ export default function NotesContainer (props: INotesContainerProps) {
       {
         props.notes.map(
             (note) => <Note 
+                key={note.id}
                 title={note.title} 
                 description={note.description}
                 expiresAt={note.expiresAt}

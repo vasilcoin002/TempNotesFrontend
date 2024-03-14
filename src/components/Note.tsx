@@ -3,7 +3,7 @@ import { TypeNote } from '@/types';
 import { useSelector } from 'react-redux';
 
 
-export function Note ({title, description, expiresAt}: TypeNote) {
+export function Note ({title, description, expiresAt}: Omit<TypeNote, "id">) {
   const themeColor = useSelector((state: RootState) => state.theme.themeColor)
   return (
     <div className={'note ' + themeColor}>
