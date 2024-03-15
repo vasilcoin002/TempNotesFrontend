@@ -1,30 +1,23 @@
 import './shadcn.css'
 import './App.css'
-import { TypeThemeColor } from './types';
 import ChangeThemeButton from './components/ui/changeThemeButton';
-import { useSelector } from 'react-redux';
-import { RootState } from './state/store';
 import NotesContainer from './components/NotesContainer';
-import { Avatar } from '@radix-ui/react-avatar';
-import { AvatarFallback, AvatarImage } from './components/ui/avatar';
+import Wrapper from './components/Wrapper';
+import Header from './components/bodySubComponents/Header';
+import Main from './components/bodySubComponents/Main';
+import UserDropdownMenuButton from './components/UserDropdownMenuButton';
 
 function App() {
-    const themeColor: TypeThemeColor = useSelector(
-        (state: RootState) => state.theme.themeColor
-    )
     return (
-        <div className={'wrapper ' + themeColor}>
-            <header className={'flex justify-between py-3 px-6 ' + themeColor}>
+        <Wrapper>
+            <Header>
                 <ChangeThemeButton/>
-                <Avatar className={"avatar w-[40px] h-[40px] overflow-hidden cursor-pointer " + themeColor}>
-                    <AvatarImage alt='avatar'/>
-                    <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-            </header>
-            <main>
+                <UserDropdownMenuButton/>
+            </Header>
+            <Main>
                 <NotesContainer/>
-            </main>
-        </div>
+            </Main>
+        </Wrapper>
     )
 }
 
