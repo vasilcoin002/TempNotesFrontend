@@ -1,11 +1,12 @@
 import {configureStore} from "@reduxjs/toolkit";
 import themeReducer from "./theme/themeColorSlice.ts"
+import notesReducer from "./notes/notesSlice.ts"
 
 
 export const store = configureStore({
     reducer: {
         theme: themeReducer,
-        // notes: notesReducer,
+        notes: notesReducer,
     },
 });
 

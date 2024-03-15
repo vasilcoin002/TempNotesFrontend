@@ -1,15 +1,17 @@
 import { TypeNote } from "@/types";
 import { Note } from "./Note";
+import { useSelector } from "react-redux";
+import { RootState } from "@/state/store";
 
-export interface INotesContainerProps {
-    notes: TypeNote[]
-}
 
-export default function NotesContainer (props: INotesContainerProps) {
+export default function NotesContainer () {
+  const notes: TypeNote[] = useSelector(
+    (state: RootState) => state.notes.notes
+  )
   return (
     <div className="notes-container">
       {
-        props.notes.map(
+        notes.map(
             (note) => <Note 
                 key={note.id}
                 title={note.title} 

@@ -1,12 +1,14 @@
 import { TypeThemeColor } from "@/types";
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export type TypeThemeColorState = {
-    themeColor: TypeThemeColor }
+    themeColor: TypeThemeColor 
+}
 
 type TypeSetThemeColor = (state: TypeThemeColorState, color: TypeThemeColor) => void
 
-const initialState:TypeThemeColorState = {themeColor: (localStorage.getItem("themeColor") as TypeThemeColor) || "dark"};
+const initialState:TypeThemeColorState = 
+    {themeColor: (localStorage.getItem("themeColor") as TypeThemeColor) || "dark"};
 
 const setThemeColor:TypeSetThemeColor = (state, color) => {
     state.themeColor = color
