@@ -1,16 +1,22 @@
 import { TypeNote } from "@/types"
 import { createSlice } from "@reduxjs/toolkit"
+import axios, { AxiosResponse } from "axios"
 
 export type TypeNotesState = {
   notes: TypeNote[]
 }
 
-// type TypeAddNote = (state: TypeNotesState, note: TypeNote) => void
+
+async function getUserNotes() {
+  const notes: TypeNote[] = await axios.get("http://localhost:8080/api/v1/notes/userNotes?userId=65df98471e44df48ce57c60f")
+  .then((responce: AxiosResponse<TypeNote[]>) => {
+    return responce.data
+  })
+  return notes
+}
 
 const initialState:TypeNotesState = {
-  notes: [
-    {id: "3", title: "title3", description: "description3", expiresAt: "apchihba"},
-  ]
+  notes: await getUserNotes()
 }
 
 export const notesSlice = createSlice({
