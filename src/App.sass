@@ -58,7 +58,13 @@ header
     grid-template-columns: repeat(2, 1fr)
   @media (max-width: 768px)
     grid-template-columns: repeat(1, 1fr)
-  &-empty__title
+  &__text
+    position: absolute
+    font-size: 1.875rem
+    line-height: 2.25rem
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
     &.dark
       color: white
     &.light

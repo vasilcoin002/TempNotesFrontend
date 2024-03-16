@@ -144,10 +144,18 @@ header.light {
     grid-template-columns: repeat(1, 1fr);
   }
 }
-.notes-container-empty__title.dark {
+.notes-container__text {
+  position: absolute;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.notes-container__text.dark {
   color: white;
 }
-.notes-container-empty__title.light {
+.notes-container__text.light {
   color: black;
 }
 
