@@ -72,6 +72,7 @@ input[type=button], input[type=submit] {
 
 body {
   flex: 1 0 2000px;
+  position: relative;
 }
 
 #root, .wrapper {
@@ -142,6 +143,12 @@ header.light {
   .notes-container {
     grid-template-columns: repeat(1, 1fr);
   }
+}
+.notes-container-empty__title.dark {
+  color: white;
+}
+.notes-container-empty__title.light {
+  color: black;
 }
 
 .note {

@@ -5,12 +5,15 @@ $border-color-dark: rgba(255, 255, 255, .3)
 
 body
   flex: 1 0 2000px
+  position: relative
 
 #root, .wrapper
   height: 100%
   width: 100%
 
 .wrapper
+  // display: grid
+  // grid-template-rows: 61px 1fr
   transition: 0.15s
   &.dark
     background: #202124
@@ -24,6 +27,9 @@ header
     border-bottom-color: $border-color-dark
   &.light
     border-bottom-color: $border-color-light
+
+// main
+//   flex: 1 0 200px
 
 .theme-image
   object-fit: fill
@@ -52,6 +58,12 @@ header
     grid-template-columns: repeat(2, 1fr)
   @media (max-width: 768px)
     grid-template-columns: repeat(1, 1fr)
+  &-empty__title
+    &.dark
+      color: white
+    &.light
+      color: black
+
 
 .note
   font-family: system-ui, sans-serif
