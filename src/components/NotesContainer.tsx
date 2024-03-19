@@ -1,4 +1,4 @@
-import { TypeNote, TypeNotesStateError, TypeNotesStateLoading, TypeThemeColor } from "@/types";
+import { TypeNote, TypeNotesStateError, TypeNotesStateStatus, TypeThemeColor } from "@/types";
 import { Note } from "./Note";
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
@@ -8,8 +8,8 @@ export default function NotesContainer () {
   const notes: TypeNote[] | undefined = useSelector(
     (state: RootState) => state.notes.notes
   )
-  const loading: TypeNotesStateLoading = useSelector(
-    (state: RootState) => state.notes.loading
+  const status: TypeNotesStateStatus = useSelector(
+    (state: RootState) => state.notes.status
   )
   const error: TypeNotesStateError = useSelector(
     (state: RootState) => state.notes.error
@@ -24,7 +24,7 @@ export default function NotesContainer () {
           "isLoading": <h1 className={"notes-container__text " + themeColor}>Notes are loading...</h1>,
           "error": <h1 className={"notes-container__text " + themeColor}>Failed to load notes: {error}</h1>,
           "succeeded": null,
-        }[loading]
+        }[status]
         // notes !== undefined ? 
         //   notes.length !== 0 ?notes.map(
         //     (note) => <Note 

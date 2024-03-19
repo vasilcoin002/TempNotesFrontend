@@ -1,11 +1,15 @@
+import { AppDispatch } from '@/state/store.ts';
+import { useDispatch } from 'react-redux';
 import { notesService } from "@/services/notesService"
-import { TypeNote, TypeNotesStateError, TypeNotesStateLoading } from "@/types"
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { TypeNote, TypeNotesStateError, TypeNotesStateStatus } from "@/types"
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios, { AxiosResponse } from "axios"
+import { RootState } from "../store"
+import { AsyncThunkConfig, GetThunkAPI } from 'node_modules/@reduxjs/toolkit/dist/createAsyncThunk';
 
 export type TypeNotesState = {
   notes: TypeNote[],
-  loading: TypeNotesStateLoading,
+  status: TypeNotesStateStatus,
   error: TypeNotesStateError,
 }
 
@@ -25,7 +29,7 @@ export type TypeNotesState = {
 
 const initialState:TypeNotesState = {
   notes: [],
-  loading: "isLoading",
+  status: "isLoading",
   error: null
 }
 
@@ -37,7 +41,44 @@ export const notesSlice = createSlice({
     //   state.notes.push(action.payload)
     // },
   },
+  extraReducers: (builder) => builder
+    .addCase(getUserNotesByUserId.pending, (state) => {
+      state.notes = []
+      state.status = "isLoading"
+      state.error = null
+    })
+    .addCase(getUserNotesByUserId.rejected, (state, action) => {
+      state.notes = []
+      state.status = "error"
+      state.error = action.payload.error 
+    })
+    .addCase(getUserNotesByUserId.fulfilled, (state, action) => {
+      state.notes = action.payload.notes
+      state.status = "succeeded"
+      state.error = null
+    })
 })
+
+export const useAppDispatch = () => useDispatch<AppDispatch>()
+
+export type TypeThunkApiConfigGetUserNotesById = {
+  rejectValue: TypeNotesState,
+  fulfillValue: TypeNotesState,
+}
+
+const getUserNotesByUserId = createAsyncThunk(
+  "notes/getUserNotesByUserId",
+  async (userId: string, thunkAPI: GetThunkAPI<TypeThunkApiConfigGetUserNotesById>) => {
+    try {
+      const responce = await notesService.getUserNotes(userId)
+      thunkAPI.fulfillWithValue({notes: responce, status: "succeeded", error: null})
+    }
+    catch (error) {
+      console.log(error)
+      thunkAPI.rejectWithValue({notes: [], status: "error", error: error})
+    }
+  },
+)
 
 // export const {addNote} = notesSlice.actions
 export default notesSlice.reducer 
