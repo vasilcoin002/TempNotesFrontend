@@ -1,12 +1,8 @@
-import { RootState } from "@/state/store"
-import { TypeThemeColor } from "@/types"
-import { useSelector } from "react-redux"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import { useThemeColor } from "@/hooks/hooks"
 
 const UserDropdownMenuButton = () => {
-  const themeColor: TypeThemeColor = useSelector(
-    (state: RootState) => state.theme.themeColor
-  )
+  const themeColor = useThemeColor()
   return (
     <Avatar className={"avatar w-[40px] h-[40px] overflow-hidden cursor-pointer " + themeColor}>
       <AvatarImage alt='avatar'/>

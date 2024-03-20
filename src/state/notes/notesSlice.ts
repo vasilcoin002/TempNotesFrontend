@@ -19,42 +19,39 @@ export const notesSlice = createSlice({
   reducers: {
   },
   extraReducers: (builder) => builder
-    .addCase(fetchUserNotesByUserId.pending, (state) => {
+    .addCase(fetchUserNotes.pending, (state) => {
       state.status = "isLoading"
       state.error = null
     })
-    .addCase(fetchUserNotesByUserId.fulfilled, (state, action) => {
+    .addCase(fetchUserNotes.fulfilled, (state, action) => {
       state.notes = action.payload.notes
       state.status = "succeeded"
       state.error = null
     })
-    .addCase(fetchUserNotesByUserId.rejected, (state, action) => {
+    .addCase(fetchUserNotes.rejected, (state, action) => {
       state.notes = []
       state.status = "error"
-      state.error = action.payload? action.payload.error : null
+      state.error = action.payload? action.payload.error : "unknown error"
     })
 })
 
-// export const useAppDispatch = () => useDispatch<AppDispatch>()
-
-export type TypeThunkApiConfigFetchUserNotesById = {
+type TypeThunkApiConfigFetchUserNotes = {
   rejectValue: TypeNotesState,
   fulfillValue: TypeNotesState,
 }
 
-export const fetchUserNotesByUserId = createAsyncThunk<TypeNotesState, string, TypeThunkApiConfigFetchUserNotesById>(
+export const fetchUserNotes = createAsyncThunk<TypeNotesState, void, TypeThunkApiConfigFetchUserNotes>(
   "notes/fetchUserNotesByUserId",
-  async (userId, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
       const responce = await fetch("http://localhost:8080/api/v1/notes/userNotes?userId=65df98471e44df48ce57c60f")
       const data = await responce.json()
       return thunkAPI.fulfillWithValue({notes: data, status: "succeeded", error: null})
     }
     catch {
-      return thunkAPI.rejectWithValue({notes: [], status: "error", error: "failed to load notes from server"})
+      return thunkAPI.rejectWithValue({notes: [], status: "error", error: "loading notes server error"})
     }
   },
 )
 
-// export const {addNote} = notesSlice.actions
 export default notesSlice.reducer 

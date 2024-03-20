@@ -1,8 +1,8 @@
 import './shadcn.css'
 import './App.css'
 import ChangeThemeButton from './components/ui/changeThemeButton';
-import NotesContainer from './components/NotesContainer';
-import Wrapper from './components/Wrapper';
+import NotesContainer from './components/notesContainerComponents/NotesContainer';
+import Wrapper from './components/bodySubComponents/Wrapper';
 import Header from './components/bodySubComponents/Header';
 import Main from './components/bodySubComponents/Main';
 import UserDropdownMenuButton from './components/UserDropdownMenuButton';

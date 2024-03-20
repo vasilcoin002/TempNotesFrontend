@@ -1,5 +1,5 @@
-import { TypeNote } from "@/types"
-import axios from "axios"
+// import { TypeNote } from "@/types"
+// import axios from "axios"
 
 class NotesService {
   private urlGetUserNotes = "http://localhost:8080/api/v1/notes/userNotes?userId="

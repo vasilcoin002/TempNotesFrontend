@@ -2,11 +2,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "@/state/store.ts";
 import {toggleThemeColor} from "@/state/theme/themeColorSlice";
 import {TypeThemeColor} from "@/types.ts";
+import { useAppDispatch, useThemeColor } from "@/hooks/hooks";
 
 
 function ChangeThemeButton() {
-    const themeColor: TypeThemeColor = useSelector((state: RootState) => state.theme.themeColor);
-    const dispatch = useDispatch<AppDispatch>();
+    const themeColor = useThemeColor();
+    const dispatch = useAppDispatch();
     return (
         <div className="cursor-pointer w-[40px] h-[40px] flex items-center justify-center " 
             onClick={() => dispatch(toggleThemeColor())}>
