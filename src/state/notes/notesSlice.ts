@@ -1,31 +1,11 @@
-import { AppDispatch } from '@/state/store.ts';
-import { useDispatch } from 'react-redux';
-import { notesService } from "@/services/notesService"
 import { TypeNote, TypeNotesStateError, TypeNotesStateStatus } from "@/types"
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import axios, { AxiosResponse } from "axios"
-import { RootState } from "../store"
-import { AsyncThunkConfig, GetThunkAPI } from 'node_modules/@reduxjs/toolkit/dist/createAsyncThunk';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 export type TypeNotesState = {
   notes: TypeNote[],
   status: TypeNotesStateStatus,
   error: TypeNotesStateError,
 }
-
-
-// async function getUserNotes() {
-//   const notes: TypeNote[] = await axios.get("http://localhost:8080/api/v1/notes/userNotes?userId=65df98471e44df48ce57c60f")
-//   .then((responce: AxiosResponse<TypeNote[]>) => {
-//     return responce.data
-//   }).catch(
-//     (e) => {
-//       console.log(e)
-//       return []
-//     }
-//   )
-//   return notes
-// }
 
 const initialState:TypeNotesState = {
   notes: [],
@@ -37,45 +17,41 @@ export const notesSlice = createSlice({
   name: "notes",
   initialState,
   reducers: {
-    // addNote: (state: TypeNotesState, action: PayloadAction<TypeNote>) => {
-    //   state.notes.push(action.payload)
-    // },
   },
   extraReducers: (builder) => builder
-    .addCase(getUserNotesByUserId.pending, (state) => {
-      state.notes = []
+    .addCase(fetchUserNotesByUserId.pending, (state) => {
       state.status = "isLoading"
       state.error = null
     })
-    .addCase(getUserNotesByUserId.rejected, (state, action) => {
-      state.notes = []
-      state.status = "error"
-      state.error = action.payload.error 
-    })
-    .addCase(getUserNotesByUserId.fulfilled, (state, action) => {
+    .addCase(fetchUserNotesByUserId.fulfilled, (state, action) => {
       state.notes = action.payload.notes
       state.status = "succeeded"
       state.error = null
     })
+    .addCase(fetchUserNotesByUserId.rejected, (state, action) => {
+      state.notes = []
+      state.status = "error"
+      state.error = action.payload? action.payload.error : null
+    })
 })
 
-export const useAppDispatch = () => useDispatch<AppDispatch>()
+// export const useAppDispatch = () => useDispatch<AppDispatch>()
 
-export type TypeThunkApiConfigGetUserNotesById = {
+export type TypeThunkApiConfigFetchUserNotesById = {
   rejectValue: TypeNotesState,
   fulfillValue: TypeNotesState,
 }
 
-const getUserNotesByUserId = createAsyncThunk(
-  "notes/getUserNotesByUserId",
-  async (userId: string, thunkAPI: GetThunkAPI<TypeThunkApiConfigGetUserNotesById>) => {
+export const fetchUserNotesByUserId = createAsyncThunk<TypeNotesState, string, TypeThunkApiConfigFetchUserNotesById>(
+  "notes/fetchUserNotesByUserId",
+  async (userId, thunkAPI) => {
     try {
-      const responce = await notesService.getUserNotes(userId)
-      thunkAPI.fulfillWithValue({notes: responce, status: "succeeded", error: null})
+      const responce = await fetch("http://localhost:8080/api/v1/notes/userNotes?userId=65df98471e44df48ce57c60f")
+      const data = await responce.json()
+      return thunkAPI.fulfillWithValue({notes: data, status: "succeeded", error: null})
     }
-    catch (error) {
-      console.log(error)
-      thunkAPI.rejectWithValue({notes: [], status: "error", error: error})
+    catch {
+      return thunkAPI.rejectWithValue({notes: [], status: "error", error: "failed to load notes from server"})
     }
   },
 )

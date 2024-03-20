@@ -1,10 +1,13 @@
 import { TypeNote, TypeNotesStateError, TypeNotesStateStatus, TypeThemeColor } from "@/types";
 import { Note } from "./Note";
-import { useSelector } from "react-redux";
-import { RootState } from "@/state/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/state/store";
+import { useEffect } from "react";
+import { fetchUserNotesByUserId } from "@/state/notes/notesSlice";
 
 
 export default function NotesContainer () {
+  const dispatch = useDispatch<AppDispatch>()
   const notes: TypeNote[] | undefined = useSelector(
     (state: RootState) => state.notes.notes
   )
@@ -17,6 +20,9 @@ export default function NotesContainer () {
   const themeColor: TypeThemeColor = useSelector(
     (state: RootState) => state.theme.themeColor
   )
+  useEffect(() => {
+    dispatch(fetchUserNotesByUserId("aboba"))
+  }, [dispatch])
   return (
     <div className="notes-container">
       {
