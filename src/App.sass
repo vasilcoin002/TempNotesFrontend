@@ -14,6 +14,7 @@ body
 .wrapper
   // display: grid
   // grid-template-rows: 61px 1fr
+  position: relative
   transition: 0.15s
   &.dark
     background: #202124
@@ -28,8 +29,11 @@ header
   &.light
     border-bottom-color: $border-color-light
 
-// main
-//   flex: 1 0 200px
+main
+  &.dark
+    background: #202124
+  &.light
+    background: #FFF
 
 .theme-image
   object-fit: fill
@@ -52,6 +56,7 @@ header
   margin: 0 auto
   grid-template-columns: repeat(4, 1fr)
   gap: 15px
+  margin-bottom: 100px
   @media (max-width: 1920px)
     grid-template-columns: repeat(3, 1fr)
   @media (max-width: 1024px)
@@ -101,6 +106,9 @@ header
     font-size: 16px
     margin-bottom: 5px
     font-weight: 700
+    background: -webkit-linear-gradient(45deg, hsla(319, 82%, 52%, 1) 0%, hsla(0, 94%, 52%, 1) 100%)
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
   &:hover
     cursor: pointer
   &.dark
@@ -110,8 +118,6 @@ header
       color: white
     & > .note__description
       color: white
-    & > .note__expiresAt
-      color: #FF6B6B
     &:hover
       background: #323438
   &.light
@@ -120,7 +126,21 @@ header
       color: #2B323B
     & > .note__description
       color: #2B323B
-    & > .note__expiresAt
-      color: #FF6B6B
     &:hover
       box-shadow: 0 0 10px rgba(0,0,0,.15)
+
+.add-note-button
+  position: fixed
+  left: 50%
+  top: 90%
+  transform: translate(-50%, -50%)
+  font-weight: 700
+  text-transform: uppercase
+  font-size: 14px
+  padding: 20px 60px
+  transition: 0.2s
+
+  // gradient text color
+  background: linear-gradient(45deg, hsla(319, 82%, 52%, 1) 0%, hsla(0, 94%, 52%, 1) 100%) var(--x, 0)/ 200%
+  &:hover
+    --x: 70%

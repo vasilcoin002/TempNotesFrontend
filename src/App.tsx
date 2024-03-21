@@ -6,6 +6,8 @@ import Wrapper from './components/bodySubComponents/Wrapper';
 import Header from './components/bodySubComponents/Header';
 import Main from './components/bodySubComponents/Main';
 import UserDropdownMenuButton from './components/UserDropdownMenuButton';
+import { } from './components/ui/button';
+import AddNoteButton from './components/ui/addNoteButton';
 
 function App() {
     return (
@@ -16,6 +18,7 @@ function App() {
             </Header>
             <Main>
                 <NotesContainer/>
+                <AddNoteButton/>
             </Main>
         </Wrapper>
     )

@@ -81,6 +81,7 @@ body {
 }
 
 .wrapper {
+  position: relative;
   transition: 0.15s;
 }
 .wrapper.dark {
@@ -99,6 +100,13 @@ header.dark {
 }
 header.light {
   border-bottom-color: #e0e0e0;
+}
+
+main.dark {
+  background: #202124;
+}
+main.light {
+  background: #FFF;
 }
 
 .theme-image {
@@ -128,6 +136,7 @@ header.light {
   margin: 0 auto;
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
+  margin-bottom: 100px;
 }
 @media (max-width: 1920px) {
   .notes-container {
@@ -192,6 +201,9 @@ header.light {
   font-size: 16px;
   margin-bottom: 5px;
   font-weight: 700;
+  background: -webkit-linear-gradient(45deg, hsl(319, 82%, 52%) 0%, hsl(0, 94%, 52%) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .note:hover {
   cursor: pointer;
@@ -206,9 +218,6 @@ header.light {
 .note.dark > .note__description {
   color: white;
 }
-.note.dark > .note__expiresAt {
-  color: #FF6B6B;
-}
 .note.dark:hover {
   background: #323438;
 }
@@ -221,9 +230,22 @@ header.light {
 .note.light > .note__description {
   color: #2B323B;
 }
-.note.light > .note__expiresAt {
-  color: #FF6B6B;
-}
 .note.light:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.add-note-button {
+  position: fixed;
+  left: 50%;
+  top: 90%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 20px 60px;
+  transition: 0.2s;
+  background: linear-gradient(45deg, hsl(319, 82%, 52%) 0%, hsl(0, 94%, 52%) 100%) var(--x, 0)/200%;
+}
+.add-note-button:hover {
+  --x: 70%;
 }/*# sourceMappingURL=App.css.map */
