@@ -75,6 +75,10 @@ body {
   position: relative;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 #root, .wrapper {
   height: 100%;
   width: 100%;
@@ -92,6 +96,7 @@ body {
 }
 
 header {
+  transition: 0.15s;
   min-height: 50px;
   border-bottom: 1px solid;
 }
@@ -102,6 +107,9 @@ header.light {
   border-bottom-color: #e0e0e0;
 }
 
+main {
+  transition: 0.15s;
+}
 main.dark {
   background: #202124;
 }
@@ -201,7 +209,7 @@ main.light {
   font-size: 16px;
   margin-bottom: 5px;
   font-weight: 700;
-  background: -webkit-linear-gradient(45deg, hsl(319, 82%, 52%) 0%, hsl(0, 94%, 52%) 100%);
+  background: linear-gradient(45deg, hsl(319, 82%, 52%) 0%, hsl(0, 94%, 52%) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -209,7 +217,6 @@ main.light {
   cursor: pointer;
 }
 .note.dark {
-  background: #202124;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 .note.dark > .note__title {
@@ -236,16 +243,22 @@ main.light {
 
 .add-note-button {
   position: fixed;
-  left: 50%;
-  top: 90%;
-  transform: translate(-50%, -50%);
+  bottom: 20px;
+  right: 25px;
   font-weight: 700;
-  text-transform: uppercase;
-  font-size: 14px;
-  padding: 20px 60px;
-  transition: 0.2s;
+  font-size: 30px;
+  padding: 6px 12px 10px;
+  border-radius: 10px;
+  transition: 0.15s;
+  cursor: pointer;
   background: linear-gradient(45deg, hsl(319, 82%, 52%) 0%, hsl(0, 94%, 52%) 100%) var(--x, 0)/200%;
 }
+.add-note-button.dark {
+  color: #202124;
+}
+.add-note-button.light {
+  color: #FFF;
+}
 .add-note-button:hover {
-  --x: 70%;
+  --x: 80%;
 }/*# sourceMappingURL=App.css.map */

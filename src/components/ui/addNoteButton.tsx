@@ -1,11 +1,13 @@
 import { useThemeColor, useUserNotes } from "@/hooks/hooks"
-import { Button } from "./button"
 
 const AddNoteButton = () => {
   const themeColor = useThemeColor()
   const {status} = useUserNotes()
   return (
-    status === "succeeded" && <Button className="add-note-button"><span>Create Note</span></Button>
+    status === "succeeded" && 
+    <div className={"add-note-button " + themeColor}>
+      <span className="add-note-button__text">+</span>
+    </div>
   )
 }
 

@@ -14,10 +14,11 @@ function App() {
         <Wrapper>
             <Header>
                 <ChangeThemeButton/>
+                {/* TODO create search note input */}
                 <UserDropdownMenuButton/>
             </Header>
             <Main>
-                <NotesContainer/>
+                <NotesContainer/> {/* TODO add dialog window to the note when it clicked */}
                 <AddNoteButton/>
             </Main>
         </Wrapper>
