@@ -11,7 +11,7 @@ export default function NotesContainer () {
       {
         {
           "isLoading": <h1 className={"notes-container__text " + themeColor}>Notes are loading...</h1>,
-          "error": <h1 className={"notes-container__text " + themeColor}>Failed to load notes: {error}</h1>,
+          "error": <h1 className={"notes-container__text " + themeColor}>{"Failed to load notes: " + error}</h1>,
           "succeeded": notes.length !== 0 ? 
               <SucceededNotes/>
               : 

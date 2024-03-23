@@ -49,7 +49,7 @@ export const fetchUserNotes = createAsyncThunk<TypeNotesState, void, TypeThunkAp
       return thunkAPI.fulfillWithValue({notes: data, status: "succeeded", error: null})
     }
     catch {
-      return thunkAPI.rejectWithValue({notes: [], status: "error", error: "loading notes server error"})
+      return thunkAPI.rejectWithValue({notes: [], status: "error", error: "loading notes error"})
     }
   },
 )

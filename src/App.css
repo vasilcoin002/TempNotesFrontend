@@ -97,8 +97,10 @@ body {
 
 header {
   transition: 0.15s;
-  min-height: 50px;
   border-bottom: 1px solid;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
 }
 header.dark {
   border-bottom-color: rgba(255, 255, 255, 0.3);
@@ -144,7 +146,6 @@ main.light {
   margin: 0 auto;
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
-  margin-bottom: 100px;
 }
 @media (max-width: 1920px) {
   .notes-container {
@@ -167,7 +168,7 @@ main.light {
   line-height: 2.25rem;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
 }
 .notes-container__text.dark {
   color: white;
@@ -261,4 +262,56 @@ main.light {
 }
 .add-note-button:hover {
   --x: 80%;
+}
+
+.dialog-textarea {
+  overflow: auto;
+  resize: none;
+  width: 100%;
+  margin-bottom: 5px;
+  border: 1px solid;
+}
+.dialog-textarea.dark {
+  color: #FFF;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.dialog-textarea.light {
+  color: #202124;
+  border-color: #e0e0e0;
+}
+.dialog__title {
+  height: 40px;
+  font-weight: 700;
+  font-size: 16px;
+}
+.dialog__description {
+  height: 150px;
+  font-size: 16px;
+}
+.dialog-header.dark, .dialog-select-button.dark {
+  color: #FFF;
+}
+.dialog-header.light, .dialog-select-button.light {
+  color: #202124;
+}
+.dialog-popover-content.dark {
+  background: #202124;
+  color: #FFF;
+}
+.dialog-popover-content.light {
+  background: #FFF;
+  color: #FFF;
+}
+.dialog-calendar {
+  padding: 0;
+}
+.dialog-calendar-icon {
+  height: 35px;
+  width: 35px;
+}
+.dialog-calendar-icon.disabled {
+  cursor: auto;
+}
+.dialog-switcher-label.dark {
+  color: #FFF;
 }/*# sourceMappingURL=App.css.map */

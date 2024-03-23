@@ -4,7 +4,9 @@ $border-color-light: #e0e0e0
 $border-color-dark: rgba(255, 255, 255, .3)
 $bg-color-light: #FFF
 $bg-color-dark: #202124
-$gradient-color: linear-gradient(45deg, hsla(319, 82%, 52%, 1) 0%, hsla(0, 94%, 52%, 1) 100%)
+$text-color-light: $bg-color-dark
+$text-color-dark: $bg-color-light
+$text-color-gradient: linear-gradient(45deg, hsla(319, 82%, 52%, 1) 0%, hsla(0, 94%, 52%, 1) 100%)
 
 body
   flex: 1 0 2000px
@@ -19,7 +21,7 @@ body
 
 .wrapper
   // display: grid
-  // grid-template-rows: 61px 1fr
+  // grid-template-rows: 60px 1fr
   position: relative
   transition: 0.15s
   &.dark
@@ -29,14 +31,17 @@ body
 
 header
   transition: 0.15s
-  min-height: 50px
   border-bottom: 1px solid
+  padding: 10px 20px
+  display: flex
+  justify-content: space-between
   &.dark
     border-bottom-color: $border-color-dark
   &.light
     border-bottom-color: $border-color-light
 
 main
+  // height: 100%
   transition: 0.15s
   &.dark
     background: $bg-color-dark
@@ -58,13 +63,15 @@ main
     color: #FFF
 
 .notes-container
+  // position: relative
   display: grid
   padding: 15px
   max-width: 1200px
   margin: 0 auto
+  // height: 100%
   grid-template-columns: repeat(4, 1fr)
   gap: 15px
-  margin-bottom: 100px
+  // margin-bottom: 100px
   @media (max-width: 1920px)
     grid-template-columns: repeat(3, 1fr)
   @media (max-width: 1024px)
@@ -77,7 +84,7 @@ main
     line-height: 2.25rem
     left: 50%
     top: 50%
-    transform: translate(-50%, -50%)
+    transform: translateX(-50%)
     &.dark
       color: white
     &.light
@@ -114,7 +121,7 @@ main
     font-size: 16px
     margin-bottom: 5px
     font-weight: 700
-    background: $gradient-color
+    background: $text-color-gradient
     -webkit-background-clip: text
     -webkit-text-fill-color: transparent
   &:hover
@@ -151,6 +158,49 @@ main
   &.light
     color: $bg-color-light
   // gradient text color
-  background: $gradient-color var(--x, 0)/ 200%
+  background: $text-color-gradient var(--x, 0)/ 200%
   &:hover
     --x: 80%
+
+.dialog
+  &-textarea
+    overflow: auto
+    resize: none
+    width: 100%
+    margin-bottom: 5px
+    border: 1px solid
+    &.dark
+      color: $text-color-dark
+      border-color: $border-color-dark
+    &.light
+      color: $text-color-light
+      border-color: $border-color-light
+  &__title
+    height: 40px
+    font-weight: 700
+    font-size: 16px
+  &__description
+    height: 150px
+    font-size: 16px
+  &-header, &-select-button
+    &.dark
+      color: $text-color-dark
+    &.light
+      color: $text-color-light
+  &-popover-content
+    &.dark
+      background: $bg-color-dark
+      color: $text-color-dark
+    &.light
+      background: $bg-color-light
+      color: $text-color-dark
+  &-calendar
+    padding: 0
+    &-icon
+      height: 35px
+      width: 35px
+      &.disabled
+        cursor: auto
+  &-switcher-label
+    &.dark
+      color: $text-color-dark

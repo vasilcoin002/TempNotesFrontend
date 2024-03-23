@@ -7,7 +7,7 @@ import Header from './components/bodySubComponents/Header';
 import Main from './components/bodySubComponents/Main';
 import UserDropdownMenuButton from './components/UserDropdownMenuButton';
 import { } from './components/ui/button';
-import AddNoteButton from './components/ui/addNoteButton';
+import AddNoteButton from './components/addNote/addNoteButton';
 
 function App() {
     return (
