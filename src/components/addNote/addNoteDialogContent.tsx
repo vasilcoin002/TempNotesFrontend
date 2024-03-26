@@ -3,56 +3,68 @@ import { Button } from "../ui/button"
 import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog"
 import { Textarea } from "../ui/textarea"
 import { Input } from "../ui/input"
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
-import { Calendar } from "../ui/calendar"
 import { useState } from "react"
 import ExpirationDateText from "./expirationDateText"
-import { Switch } from "../ui/switch"
-import { Label } from "../ui/label"
+import CalendarButton from "./calendarButton"
+import ExpirationDateSwitcher from "./expirationDateSwitcher"
+import { notesService } from "@/services/notesService"
+import { toast } from "../ui/use-toast"
 
 
 const AddNoteDialogContent = () => {
-  // TODO change the placement of the components: replace calendar next to title, change the expiration date label to be visible more
-  // FIXME when it's light theme, calendar shows the monotone text color as the bg, so text is invisible
+  // FIXME change useState of title and description into useRef values
+  // FIXME try to return focus outlines on all of the components (and add it to calendar)
   const themeColor = useThemeColor()
+  const [title, setTitle] = useState<string>("")
+  const [description, setDescription] = useState<string>("")
   const [dateDisabled, setDateDisabled] = useState<boolean>(false)
   const [date, setDate] = useState<Date | undefined>(undefined)
+
   return (
     <DialogContent className={themeColor}>
       <DialogHeader className={"dialog-header " + themeColor}>
         <DialogTitle>Create your note</DialogTitle>
       </DialogHeader>
       <div>
-        <Input className={"dialog-textarea dialog__title " + themeColor} placeholder="Write note's title here..."/>
-        <Popover>
-          <PopoverTrigger className="inline-block">
-            <img 
-              className={"dialog-calendar-icon " + (dateDisabled ? "disabled" : "")}
-              src={dateDisabled ? "/calendar_disabled.png" : "/calendar_" + themeColor + ".png"} 
-              alt="calendar"
-            />
-          </PopoverTrigger>
-          <PopoverContent className={"dialog-popover-content " + themeColor}>
-            <Calendar
-              className={"dialog-calendar " + themeColor}
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              disabled={dateDisabled}
-            />
-          </PopoverContent>
-        </Popover>
-        <Textarea className={"dialog-textarea dialog__description " + themeColor} placeholder="Write note's description here..."/>
-        <div>
-          <Switch checked={!dateDisabled} onCheckedChange={() => setDateDisabled(!dateDisabled)} id="date-switcher"/>
-          <Label className={"dialog-switcher-label " + themeColor} htmlFor="date-switcher">
-            {(dateDisabled ? "Disabled" : "Enabled") + " expiration date"}
-          </Label>
+        <div className="dialog-fields-container mb-[5px]">
+          <Input 
+            className={"dialog-textarea dialog-title ring-0 ring-offset-0 " + themeColor} 
+            placeholder="Write note's title here..."
+            onChange={(e) => {setTitle(e.target.value)}}
+          />
+          <CalendarButton date={date} dateDisabled={dateDisabled} setDate={setDate}/>
+          <Textarea 
+            className={"dialog-textarea dialog-description " + themeColor} 
+            placeholder="Write note's description here..."
+            onChange={(e) => {setDescription(e.target.value)}}
+          />
         </div>
-        <ExpirationDateText date={date} dateDisabled={dateDisabled}/>
+        <div className="flex justify-between items-center">
+          <ExpirationDateSwitcher dateDisabled={dateDisabled} setDateDisabled={setDateDisabled}/>
+          <ExpirationDateText date={date} dateDisabled={dateDisabled}/>
+        </div>
       </div>
       <DialogFooter className={themeColor}>
-        <Button>Save</Button>
+        <Button 
+          onClick={() => {
+            const noteArgumentsCheck = notesService.getCheckingOfCreatingNoteArguments(
+              title, description, date, dateDisabled
+            )
+            if (!noteArgumentsCheck.correct) {
+              console.log(noteArgumentsCheck.error)
+              console.log(title)
+              console.log(description)
+              toast(
+                {
+                  title: "Error has occured",
+                  description: noteArgumentsCheck.error
+                }
+              )
+            }
+          }}
+        >
+          Save
+        </Button>
       </DialogFooter>
     </DialogContent>
   )

@@ -264,11 +264,22 @@ main.light {
   --x: 80%;
 }
 
+.dialog-fields-container {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 1fr 40px;
+  grid-template-rows: 40px 100%;
+}
+.dialog-cross.dark {
+  color: #FFF;
+}
+.dialog-cross.light {
+  color: #202124;
+}
 .dialog-textarea {
   overflow: auto;
   resize: none;
   width: 100%;
-  margin-bottom: 5px;
   border: 1px solid;
 }
 .dialog-textarea.dark {
@@ -279,12 +290,36 @@ main.light {
   color: #202124;
   border-color: #e0e0e0;
 }
-.dialog__title {
+.dialog-title {
+  grid-column: 1/span 1;
   height: 40px;
   font-weight: 700;
   font-size: 16px;
 }
-.dialog__description {
+.dialog-calendar {
+  grid-column: 2/span 1;
+  padding: 0;
+}
+.dialog-calendar-button {
+  height: 40px;
+  width: 40px;
+  border: 1px solid;
+}
+.dialog-calendar-button.dark {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.dialog-calendar-button.light {
+  border-color: #e0e0e0;
+}
+.dialog-calendar-icon {
+  height: 30px;
+  width: 30px;
+}
+.dialog-calendar-icon.disabled {
+  cursor: auto;
+}
+.dialog-description {
+  grid-column: 1/span 2;
   height: 150px;
   font-size: 16px;
 }
@@ -300,17 +335,7 @@ main.light {
 }
 .dialog-popover-content.light {
   background: #FFF;
-  color: #FFF;
-}
-.dialog-calendar {
-  padding: 0;
-}
-.dialog-calendar-icon {
-  height: 35px;
-  width: 35px;
-}
-.dialog-calendar-icon.disabled {
-  cursor: auto;
+  color: #202124;
 }
 .dialog-switcher-label.dark {
   color: #FFF;

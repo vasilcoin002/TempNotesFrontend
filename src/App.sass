@@ -7,6 +7,7 @@ $bg-color-dark: #202124
 $text-color-light: $bg-color-dark
 $text-color-dark: $bg-color-light
 $text-color-gradient: linear-gradient(45deg, hsla(319, 82%, 52%, 1) 0%, hsla(0, 94%, 52%, 1) 100%)
+$height-calendar-title: 40px
 
 body
   flex: 1 0 2000px
@@ -63,15 +64,12 @@ main
     color: #FFF
 
 .notes-container
-  // position: relative
   display: grid
   padding: 15px
   max-width: 1200px
   margin: 0 auto
-  // height: 100%
   grid-template-columns: repeat(4, 1fr)
   gap: 15px
-  // margin-bottom: 100px
   @media (max-width: 1920px)
     grid-template-columns: repeat(3, 1fr)
   @media (max-width: 1024px)
@@ -163,11 +161,21 @@ main
     --x: 80%
 
 .dialog
+  &-fields-container
+    display: grid
+    gap: 5px
+    grid-template-columns: 1fr $height-calendar-title
+    grid-template-rows: $height-calendar-title 100%
+  &-cross
+    &.dark
+      color: $text-color-dark
+    &.light
+      color: $text-color-light
   &-textarea
     overflow: auto
     resize: none
     width: 100%
-    margin-bottom: 5px
+    // margin-bottom: 5px
     border: 1px solid
     &.dark
       color: $text-color-dark
@@ -175,11 +183,29 @@ main
     &.light
       color: $text-color-light
       border-color: $border-color-light
-  &__title
-    height: 40px
+  &-title
+    grid-column: 1 / span 1
+    height: $height-calendar-title
     font-weight: 700
     font-size: 16px
-  &__description
+  &-calendar
+    grid-column: 2 / span 1
+    padding: 0
+    &-button
+      height: $height-calendar-title
+      width: $height-calendar-title
+      border: 1px solid
+      &.dark
+        border-color: $border-color-dark
+      &.light
+        border-color: $border-color-light
+    &-icon
+      height: 30px
+      width: 30px
+      &.disabled
+        cursor: auto
+  &-description
+    grid-column: 1 / span 2
     height: 150px
     font-size: 16px
   &-header, &-select-button
@@ -193,14 +219,7 @@ main
       color: $text-color-dark
     &.light
       background: $bg-color-light
-      color: $text-color-dark
-  &-calendar
-    padding: 0
-    &-icon
-      height: 35px
-      width: 35px
-      &.disabled
-        cursor: auto
+      color: $text-color-light
   &-switcher-label
     &.dark
       color: $text-color-dark
