@@ -4,12 +4,12 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { useState } from "react"
 
 type Props = {
-  date: Date | undefined,
-  dateDisabled: boolean,
-  setDate: React.Dispatch<React.SetStateAction<Date | undefined>>
+  expirationDate: Date | undefined,
+  isDateDisabled: boolean,
+  setExpirationDate: React.Dispatch<React.SetStateAction<Date | undefined>>
 }
 
-const CalendarButton = ({date, dateDisabled, setDate}:Props) => {
+const CalendarButton = ({expirationDate, isDateDisabled, setExpirationDate}:Props) => {
   const themeColor = useThemeColor()
   const [isOpened, setIsOpened] = useState<boolean>(false)
   return (
@@ -19,8 +19,8 @@ const CalendarButton = ({date, dateDisabled, setDate}:Props) => {
           "dialog-calendar-button rounded-md flex justify-center items-center " + themeColor
         }>
           <img 
-            className={"dialog-calendar-icon " + (dateDisabled ? "disabled" : "")}
-            src={dateDisabled ? "/calendar_disabled.png" : "/calendar_" + themeColor + ".png"} 
+            className={"dialog-calendar-icon " + (isDateDisabled ? "disabled" : "")}
+            src={isDateDisabled ? "/calendar_disabled.png" : "/calendar_" + themeColor + ".png"} 
             alt="calendar"
           />
         </div>
@@ -29,9 +29,9 @@ const CalendarButton = ({date, dateDisabled, setDate}:Props) => {
         <Calendar
           className={"dialog-calendar " + themeColor}
           mode="single"
-          selected={date}
-          onSelect={setDate}
-          disabled={dateDisabled}
+          selected={expirationDate}
+          onSelect={setExpirationDate}
+          disabled={isDateDisabled}
         />
       </PopoverContent>
     </Popover>

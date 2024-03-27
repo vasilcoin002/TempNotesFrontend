@@ -14,11 +14,12 @@ import { toast } from "../ui/use-toast"
 const AddNoteDialogContent = () => {
   // FIXME change useState of title and description into useRef values
   // FIXME try to return focus outlines on all of the components (and add it to calendar)
+  // TODO make the save button work
   const themeColor = useThemeColor()
   const [title, setTitle] = useState<string>("")
   const [description, setDescription] = useState<string>("")
-  const [dateDisabled, setDateDisabled] = useState<boolean>(false)
-  const [date, setDate] = useState<Date | undefined>(undefined)
+  const [isDateDisabled, setIsDateDisabled] = useState<boolean>(false)
+  const [expirationDate, setExpirationDate] = useState<Date | undefined>(undefined)
 
   return (
     <DialogContent className={themeColor}>
@@ -32,7 +33,7 @@ const AddNoteDialogContent = () => {
             placeholder="Write note's title here..."
             onChange={(e) => {setTitle(e.target.value)}}
           />
-          <CalendarButton date={date} dateDisabled={dateDisabled} setDate={setDate}/>
+          <CalendarButton expirationDate={expirationDate} isDateDisabled={isDateDisabled} setExpirationDate={setExpirationDate}/>
           <Textarea 
             className={"dialog-textarea dialog-description " + themeColor} 
             placeholder="Write note's description here..."
@@ -40,15 +41,15 @@ const AddNoteDialogContent = () => {
           />
         </div>
         <div className="flex justify-between items-center">
-          <ExpirationDateSwitcher dateDisabled={dateDisabled} setDateDisabled={setDateDisabled}/>
-          <ExpirationDateText date={date} dateDisabled={dateDisabled}/>
+          <ExpirationDateSwitcher isDateDisabled={isDateDisabled} setIsDateDisabled={setIsDateDisabled}/>
+          <ExpirationDateText expirationDate={expirationDate} isDateDisabled={isDateDisabled}/>
         </div>
       </div>
       <DialogFooter className={themeColor}>
         <Button 
           onClick={() => {
             const noteArgumentsCheck = notesService.getCheckingOfCreatingNoteArguments(
-              title, description, date, dateDisabled
+              title, description, expirationDate, isDateDisabled
             )
             if (!noteArgumentsCheck.correct) {
               console.log(noteArgumentsCheck.error)

@@ -1,4 +1,4 @@
-import { Note } from "./Note"
+import { Note } from "../note/Note"
 import { useUserNotes } from "@/hooks/hooks"
 
 const SucceededNotes = () => {
