@@ -5,11 +5,11 @@ import { useState } from "react"
 
 type Props = {
   expirationDate: Date | undefined,
-  isDateDisabled: boolean,
+  isExpirationDateDisabled: boolean,
   setExpirationDate: React.Dispatch<React.SetStateAction<Date | undefined>>
 }
 
-const CalendarButton = ({expirationDate, isDateDisabled, setExpirationDate}:Props) => {
+const CalendarButton = ({expirationDate, isExpirationDateDisabled, setExpirationDate}:Props) => {
   const themeColor = useThemeColor()
   const [isOpened, setIsOpened] = useState<boolean>(false)
   return (
@@ -19,8 +19,8 @@ const CalendarButton = ({expirationDate, isDateDisabled, setExpirationDate}:Prop
           "dialog-calendar-button rounded-md flex justify-center items-center " + themeColor
         }>
           <img 
-            className={"dialog-calendar-icon " + (isDateDisabled ? "disabled" : "")}
-            src={isDateDisabled ? "/calendar_disabled.png" : "/calendar_" + themeColor + ".png"} 
+            className={"dialog-calendar-icon " + (isExpirationDateDisabled ? "disabled" : "")}
+            src={isExpirationDateDisabled ? "/calendar_disabled.png" : "/calendar_" + themeColor + ".png"} 
             alt="calendar"
           />
         </div>
@@ -31,7 +31,7 @@ const CalendarButton = ({expirationDate, isDateDisabled, setExpirationDate}:Prop
           mode="single"
           selected={expirationDate}
           onSelect={setExpirationDate}
-          disabled={isDateDisabled}
+          disabled={isExpirationDateDisabled}
         />
       </PopoverContent>
     </Popover>

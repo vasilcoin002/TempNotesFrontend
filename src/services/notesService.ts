@@ -11,11 +11,23 @@ class NotesService {
     return data.json()
   }
 
-  getCheckingOfCreatingNoteArguments(
+  // TODO make the addUserNote method work
+  async addUserNote(title: string, description: string, expirationDate?: Date) {
+    console.log([title, description, expirationDate])
+  }
+
+  // TODO make the updateUserNote method work
+  async updateUserNote(id: string, title: string, description: string, expirationDate?: Date) {
+    console.log([id, title, description, expirationDate])
+  }
+
+
+
+  getCheckingOfNoteArgs(
     title: string,
     description: string,
-    date: Date | undefined,
-    dateDisabled: boolean,
+    isExpirationDateDisabled: boolean,
+    expirationDate?: Date,
   ) {
     const state: {correct: boolean, error: string | null} = {correct: true, error: null}
     const now = Date.now()
@@ -24,12 +36,12 @@ class NotesService {
       state.correct = false
       return state
     }
-    else if(dateDisabled === false && date === undefined) {
+    else if(isExpirationDateDisabled === false && expirationDate === undefined) {
       state.error = "Please, select the date or disable it"
       state.correct = false
       return state
     }
-    else if(dateDisabled === false && date !== undefined && date.getTime() <= now) {
+    else if(isExpirationDateDisabled === false && expirationDate && expirationDate.getTime() <= now) {
       state.error = "Please, select the day which is after today"
       state.correct = false
       return state

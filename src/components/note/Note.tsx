@@ -1,9 +1,11 @@
 import { useThemeColor } from '@/hooks/hooks';
 import { TypeNote } from '@/types';
 import { Dialog, DialogTrigger } from '../ui/dialog';
-import EditNoteDialogContent from './editNoteDialogContent';
+import EditNoteDialogContent from '../editNote/editNoteDialogContent';
 
-export function Note ({title, description, expiresAt}: Omit<TypeNote, "id">) {
+// TODO replace it to notesContainerComponents
+// TODO make it arrow function
+export function Note ({id, title, description, expiresAt}: TypeNote) {
   const themeColor = useThemeColor()
   return (
     <Dialog>
@@ -16,7 +18,7 @@ export function Note ({title, description, expiresAt}: Omit<TypeNote, "id">) {
           <p className="note__expiresAt">Expires at: {expiresAt}</p>
         </div>
       </DialogTrigger>
-      <EditNoteDialogContent title={title} description={description} expirationDate={expiresAt}/>
+      <EditNoteDialogContent id={id} title={title} description={description} expirationDate={expiresAt}/>
     </Dialog>
   );
 }

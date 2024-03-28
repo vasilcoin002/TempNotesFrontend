@@ -1,11 +1,11 @@
-import { Note } from "../note/Note"
 import { useUserNotes } from "@/hooks/hooks"
+import { Note } from "../note/Note"
 
 const SucceededNotes = () => {
   const {notes} = useUserNotes()
   return (
     notes.map(
-      note => <Note 
+      note => <Note
         key={note.id} title={note.title} description={note.description} expiresAt={note.expiresAt}
       />
     )

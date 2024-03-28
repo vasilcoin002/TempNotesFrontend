@@ -1,73 +1,20 @@
-import { useThemeColor } from "@/hooks/hooks"
-import { Button } from "../ui/button"
-import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog"
-import { Textarea } from "../ui/textarea"
-import { Input } from "../ui/input"
-import { useState } from "react"
-import ExpirationDateText from "./expirationDateText"
-import CalendarButton from "./calendarButton"
-import ExpirationDateSwitcher from "./expirationDateSwitcher"
 import { notesService } from "@/services/notesService"
-import { toast } from "../ui/use-toast"
+import NoteDialogContent, { TypeSaveFn } from "../note/noteDialogContent"
 
+// TODO make it through notesSlice
+const saveFn: TypeSaveFn = (
+  id, title, description, expirationDate
+) => notesService.addUserNote(title, description, expirationDate)
 
 const AddNoteDialogContent = () => {
-  // FIXME change useState of title and description into useRef values
-  // FIXME try to return focus outlines on all of the components (and add it to calendar)
-  // TODO make the save button work
-  const themeColor = useThemeColor()
-  const [title, setTitle] = useState<string>("")
-  const [description, setDescription] = useState<string>("")
-  const [isDateDisabled, setIsDateDisabled] = useState<boolean>(false)
-  const [expirationDate, setExpirationDate] = useState<Date | undefined>(undefined)
-
   return (
-    <DialogContent className={themeColor}>
-      <DialogHeader className={"dialog-header " + themeColor}>
-        <DialogTitle>Create your note</DialogTitle>
-      </DialogHeader>
-      <div>
-        <div className="dialog-fields-container mb-[5px]">
-          <Input 
-            className={"dialog-textarea dialog-title ring-0 ring-offset-0 " + themeColor} 
-            placeholder="Write note's title here..."
-            onChange={(e) => {setTitle(e.target.value)}}
-          />
-          <CalendarButton expirationDate={expirationDate} isDateDisabled={isDateDisabled} setExpirationDate={setExpirationDate}/>
-          <Textarea 
-            className={"dialog-textarea dialog-description " + themeColor} 
-            placeholder="Write note's description here..."
-            onChange={(e) => {setDescription(e.target.value)}}
-          />
-        </div>
-        <div className="flex justify-between items-center">
-          <ExpirationDateSwitcher isDateDisabled={isDateDisabled} setIsDateDisabled={setIsDateDisabled}/>
-          <ExpirationDateText expirationDate={expirationDate} isDateDisabled={isDateDisabled}/>
-        </div>
-      </div>
-      <DialogFooter className={themeColor}>
-        <Button 
-          onClick={() => {
-            const noteArgumentsCheck = notesService.getCheckingOfCreatingNoteArguments(
-              title, description, expirationDate, isDateDisabled
-            )
-            if (!noteArgumentsCheck.correct) {
-              console.log(noteArgumentsCheck.error)
-              console.log(title)
-              console.log(description)
-              toast(
-                {
-                  title: "Error has occured",
-                  description: noteArgumentsCheck.error
-                }
-              )
-            }
-          }}
-        >
-          Save
-        </Button>
-      </DialogFooter>
-    </DialogContent>
+    <NoteDialogContent
+      dialogTitle="Create your note" 
+      initialTitle="" 
+      initialDescription="" 
+      initialIsExpirationDateDisabled={true}
+      saveFn={saveFn}
+    />
   )
 }
 
