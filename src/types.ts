@@ -2,7 +2,7 @@ export type TypeNote = {
     id: string,
     title: string,
     description: string,
-    expiresAt: string,
+    expirationDate?: string,
 }
 
 export type TypeThemeColor = "dark" | "light"

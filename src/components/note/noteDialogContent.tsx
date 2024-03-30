@@ -20,12 +20,12 @@ type TypeNoteDialogContentProps = {
   saveFn: TypeSaveFn
 }
 
-export type TypeSaveFn = (
-  id: string | undefined,
+export type TypeSaveFn = (note: {
+  id?: string,
   title: string, 
   description: string, 
   expirationDate: Date | undefined
-) => Promise<void>
+}) => Promise<void>
 
 type TypeCheckNoteArgsProps = {
   title: string,
@@ -59,7 +59,12 @@ const saveNote = (
 ) => {
   if (checkNoteArgs({title, description, isExpirationDateDisabled, expirationDate})) {
     // TODO make the save button work
-    saveFn(noteId, title, description, expirationDate)
+    saveFn({
+      id: noteId, 
+      title, 
+      description, 
+      expirationDate: isExpirationDateDisabled ? undefined : expirationDate
+    })
   }
 }
 
@@ -74,7 +79,7 @@ const NoteDialogContent = ({
 }: TypeNoteDialogContentProps) => {
   // FIXME change useState of title and description into useRef
   // FIXME try to return focus outlines on all of the components (and add it to calendar)
-  // FIXME fix the scrolling downm of the page after clothing dialog window
+  // FIXME fix the scrolling down of the page after clothing dialog window
   const themeColor = useThemeColor()
   const [title, setTitle] = useState<string>(initialTitle)
   const [description, setDescription] = useState<string>(initialDescription)

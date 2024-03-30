@@ -2,9 +2,8 @@ import { notesService } from "@/services/notesService"
 import NoteDialogContent, { TypeSaveFn } from "../note/noteDialogContent"
 
 // TODO make it through notesSlice
-const saveFn: TypeSaveFn = (
-  id, title, description, expirationDate
-) => notesService.addUserNote(title, description, expirationDate)
+const saveFn: TypeSaveFn = ({title, description, expirationDate}) => 
+    notesService.addUserNote(title, description, expirationDate)
 
 const AddNoteDialogContent = () => {
   return (

@@ -22,7 +22,6 @@ class NotesService {
   }
 
 
-
   getCheckingOfNoteArgs(
     title: string,
     description: string,

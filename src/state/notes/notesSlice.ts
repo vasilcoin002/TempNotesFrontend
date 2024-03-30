@@ -27,6 +27,7 @@ export const notesSlice = createSlice({
       state.notes = action.payload.notes
       state.status = "succeeded"
       state.error = null
+      console.log(action.payload.notes)
     })
     .addCase(fetchUserNotes.rejected, (state, action) => {
       state.notes = []
