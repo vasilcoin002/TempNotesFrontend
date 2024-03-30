@@ -1,11 +1,15 @@
 import { notesService } from "@/services/notesService"
 import NoteDialogContent, { TypeSaveFn } from "../note/noteDialogContent"
 
+type Props = {
+  open: boolean
+}
+
 // TODO make it through notesSlice
 const saveFn: TypeSaveFn = ({title, description, expirationDate}) => 
     notesService.addUserNote(title, description, expirationDate)
 
-const AddNoteDialogContent = () => {
+const AddNoteDialogContent = ({open}: Props) => {
   return (
     <NoteDialogContent
       dialogTitle="Create your note" 
@@ -13,6 +17,7 @@ const AddNoteDialogContent = () => {
       initialDescription="" 
       initialIsExpirationDateDisabled={true}
       saveFn={saveFn}
+      open={open}
     />
   )
 }

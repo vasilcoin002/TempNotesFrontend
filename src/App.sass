@@ -92,7 +92,6 @@ main
 .note
   font-family: system-ui, sans-serif
   border-radius: 10px
-  color: white
   padding: 8px 10px
   overflow: hidden
   transition: 0.15s
@@ -131,20 +130,16 @@ main
     cursor: pointer
   &.dark
     border: 1px solid $border-color-dark
-    & > .note__title
-      color: white
-    & > .note__description
-      color: white
     &:hover
       background: #323438
+  &__title.dark, &__description.dark
+    color: $text-color-dark
   &.light
     border: 1px solid $border-color-light
-    & > .note__title
-      color: #2B323B
-    & > .note__description
-      color: #2B323B
     &:hover
       box-shadow: 0 0 10px rgba(0,0,0,.15)
+  &__title.light, &__description.light
+    color: $text-color-light
 
 .add-note-button
   position: fixed

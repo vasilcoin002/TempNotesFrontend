@@ -180,7 +180,6 @@ main.light {
 .note {
   font-family: system-ui, sans-serif;
   border-radius: 10px;
-  color: white;
   padding: 8px 10px;
   overflow: hidden;
   transition: 0.15s;
@@ -226,26 +225,20 @@ main.light {
 .note.dark {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
-.note.dark > .note__title {
-  color: white;
-}
-.note.dark > .note__description {
-  color: white;
-}
 .note.dark:hover {
   background: #323438;
+}
+.note__title.dark, .note__description.dark {
+  color: #FFF;
 }
 .note.light {
   border: 1px solid #e0e0e0;
 }
-.note.light > .note__title {
-  color: #2B323B;
-}
-.note.light > .note__description {
-  color: #2B323B;
-}
 .note.light:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+.note__title.light, .note__description.light {
+  color: #202124;
 }
 
 .add-note-button {

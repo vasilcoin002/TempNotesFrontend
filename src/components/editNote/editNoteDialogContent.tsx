@@ -5,14 +5,15 @@ type Props = {
   id: string,
   title: string,
   description: string,
-  expirationDate?: string
+  expirationDate?: string,
+  open: boolean,
 }
 
 // TODO make it through notesSlice
 const saveFn: TypeSaveFn = ({id, title, description, expirationDate}) => 
     notesService.updateUserNote(id as string, title, description, expirationDate)
 
-const EditNoteDialogContent = ({id, title, description, expirationDate}: Props) => {
+const EditNoteDialogContent = ({id, title, description, expirationDate, open}: Props) => {
   return (
     <NoteDialogContent
       dialogTitle="Edit note"
@@ -22,6 +23,7 @@ const EditNoteDialogContent = ({id, title, description, expirationDate}: Props) 
       initialIsExpirationDateDisabled={expirationDate ? false : true}
       initialExpirationDate={expirationDate ? expirationDate : undefined}
       saveFn={saveFn}
+      open={open}
     />
   )
 }

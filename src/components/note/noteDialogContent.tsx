@@ -3,7 +3,7 @@ import { Button } from "../ui/button"
 import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog"
 import { Textarea } from "../ui/textarea"
 import { Input } from "../ui/input"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { notesService } from "@/services/notesService"
 import { toast } from "../ui/use-toast"
 import CalendarButton from "./calendarButton"
@@ -17,7 +17,8 @@ type TypeNoteDialogContentProps = {
   initialIsExpirationDateDisabled: boolean,
   initialExpirationDate?: string,
   dialogTitle: string,
-  saveFn: TypeSaveFn
+  saveFn: TypeSaveFn,
+  open: boolean,
 }
 
 export type TypeSaveFn = (note: {
@@ -68,6 +69,10 @@ const saveNote = (
   }
 }
 
+const getExpirationDateFromString = (expirationDate: string | undefined) => {
+  return expirationDate ? new Date(expirationDate) : undefined
+}
+
 const NoteDialogContent = ({
   noteId,
   initialTitle, 
@@ -76,8 +81,8 @@ const NoteDialogContent = ({
   initialExpirationDate,
   dialogTitle,
   saveFn,
+  open: isDialogWindowOpened,
 }: TypeNoteDialogContentProps) => {
-  // FIXME change useState of title and description into useRef
   // FIXME try to return focus outlines on all of the components (and add it to calendar)
   // FIXME fix the scrolling down of the page after clothing dialog window
   const themeColor = useThemeColor()
@@ -86,7 +91,17 @@ const NoteDialogContent = ({
   const [isExpirationDateDisabled, setIsExpirationDateDisabled] = 
       useState<boolean>(initialIsExpirationDateDisabled)
   const [expirationDate, setExpirationDate] = 
-      useState<Date | undefined>(initialExpirationDate ? new Date(initialExpirationDate) : undefined)
+      useState<Date | undefined>(getExpirationDateFromString(initialExpirationDate))
+
+  useEffect(() => {
+    if (isDialogWindowOpened) {
+      setTitle(initialTitle)
+      setDescription(initialDescription)
+      setIsExpirationDateDisabled(initialIsExpirationDateDisabled)
+      setExpirationDate(getExpirationDateFromString(initialExpirationDate))
+    }
+  }, [isDialogWindowOpened])
+
   return (
     <DialogContent className={themeColor}>
       <DialogHeader className={"dialog-header " + themeColor}>
