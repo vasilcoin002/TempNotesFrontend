@@ -13,17 +13,13 @@ const CalendarButton = ({expirationDate, isExpirationDateDisabled, setExpiration
   const themeColor = useThemeColor()
   const [isOpened, setIsOpened] = useState<boolean>(false)
   return (
-    <Popover>
-      <PopoverTrigger onClick={() => setIsOpened(!isOpened)} className={"dialog-calendar-button-container " + themeColor}>
-        <div className={
-          "dialog-calendar-button rounded-md flex justify-center items-center " + themeColor
-        }>
-          <img 
-            className={"dialog-calendar-icon " + (isExpirationDateDisabled ? "disabled" : "")}
-            src={isExpirationDateDisabled ? "/calendar_disabled.png" : "/calendar_" + themeColor + ".png"} 
-            alt="calendar"
-          />
-        </div>
+    <Popover open={isOpened} onOpenChange={setIsOpened}>
+      <PopoverTrigger className={"dialog-calendar-button-container dialog-calendar-button rounded-md flex justify-center items-center ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=open]:ring-offset-background data-[state=open]:outline-none data-[state=open]:ring-2 data-[state=open]:ring-ring data-[state=open]:ring-offset-2 " + themeColor}>
+        <img
+          className={"dialog-calendar-icon " + (isExpirationDateDisabled ? "disabled" : "")}
+          src={isExpirationDateDisabled ? "/calendar_disabled.png" : "/calendar_" + themeColor + ".png"} 
+          alt="calendar"
+        />
       </PopoverTrigger>
       <PopoverContent className={"dialog-popover-content " + themeColor}>
         <Calendar

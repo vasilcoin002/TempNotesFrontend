@@ -1,11 +1,7 @@
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "@/state/store.ts";
 import {toggleThemeColor} from "@/state/theme/themeColorSlice";
-import {TypeThemeColor} from "@/types.ts";
 import { useAppDispatch, useThemeColor } from "@/hooks/hooks";
 
-
-function ChangeThemeButton() {
+const ChangeThemeButton = () => {
     const themeColor = useThemeColor();
     const dispatch = useAppDispatch();
     return (
