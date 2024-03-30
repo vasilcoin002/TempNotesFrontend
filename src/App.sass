@@ -12,6 +12,7 @@ $height-calendar-title: 40px
 body
   flex: 1 0 2000px
   position: relative
+  font-family: system-ui, sans-serif
 
 ::-webkit-scrollbar
     display: none
@@ -21,8 +22,6 @@ body
   width: 100%
 
 .wrapper
-  // display: grid
-  // grid-template-rows: 60px 1fr
   position: relative
   transition: 0.15s
   &.dark
@@ -42,7 +41,6 @@ header
     border-bottom-color: $border-color-light
 
 main
-  // height: 100%
   transition: 0.15s
   &.dark
     background: $bg-color-dark
@@ -68,7 +66,6 @@ main
   padding: 15px
   max-width: 1200px
   margin: 0 auto
-  grid-template-columns: repeat(4, 1fr)
   gap: 15px
   @media (max-width: 1920px)
     grid-template-columns: repeat(3, 1fr)
@@ -88,36 +85,35 @@ main
     &.light
       color: black
 
-
 .note
-  font-family: system-ui, sans-serif
   border-radius: 10px
   padding: 8px 10px
   overflow: hidden
   transition: 0.15s
   display: flex
   flex-direction: column
-  align-items: start
+  align-items: flex-start
+  text-align: left
+  width: 100%
   &-container
-    height: 100%
+    overflow: hidden
+  &__text-container
+    width: 100%
+    overflow: hidden
+  &__text
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
   &__title
     font-weight: bold
     font-size: 20px
     line-height: 1.2
     height: 24px
     width: 100%
-    white-space: nowrap
-    overflow: hidden
-    display: inline-block
-    text-overflow: ellipsis
   &__description
     font-size: 16px
     width: 100%
     height: 20px
-    white-space: nowrap
-    overflow: hidden
-    display: inline-block
-    text-overflow: ellipsis
     flex: 1 0 100%
   &__expiresAt
     font-size: 16px
