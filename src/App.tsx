@@ -19,7 +19,7 @@ function App() {
                 <UserDropdownMenuButton/>
             </Header>
             <Main>
-                <NotesContainer/> {/* TODO add dialog window to the note when it is clicked */}
+                <NotesContainer/>
                 <AddNoteButton/>
                 <Toaster/>
             </Main>

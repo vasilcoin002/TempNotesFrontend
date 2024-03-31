@@ -140,20 +140,21 @@ main
   position: fixed
   bottom: 20px
   right: 25px
-  font-weight: 700
-  font-size: 30px
-  padding: 6px 12px 10px
-  border-radius: 10px
-  transition: 0.15s
-  cursor: pointer
-  &.dark
-    color: $bg-color-dark
-  &.light
-    color: $bg-color-light
-  // gradient text color
-  background: $text-color-gradient var(--x, 0)/ 200%
-  &:hover
-    --x: 80%
+  &__internal-container
+    font-weight: 700
+    font-size: 30px
+    padding: 6px 12px 10px
+    border-radius: 10px
+    transition: 0.15s
+    cursor: pointer
+    &.dark
+      color: $bg-color-dark
+    &.light
+      color: $bg-color-light
+    // gradient text color
+    background: $text-color-gradient var(--x, 0)/ 200%
+    &:hover
+      --x: 80%
 
 .dialog
   &-fields-container

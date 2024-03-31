@@ -1,5 +1,5 @@
 import { notesService } from "@/services/notesService"
-import NoteDialogContent, { TypeSaveFn } from "../note/noteDialogContent"
+import NoteDialogContent, { TypeSaveFn } from "../noteDialogContent/noteDialogContent"
 
 type Props = {
   open: boolean

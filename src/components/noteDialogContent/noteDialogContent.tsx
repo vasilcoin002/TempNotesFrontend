@@ -83,7 +83,6 @@ const NoteDialogContent = ({
   saveFn,
   open: isDialogWindowOpened,
 }: TypeNoteDialogContentProps) => {
-  // FIXME try to return focus outlines on all of the components (and add it to calendar)
   // FIXME fix the scrolling down of the page after clothing dialog window
   const themeColor = useThemeColor()
   const [title, setTitle] = useState<string>(initialTitle)

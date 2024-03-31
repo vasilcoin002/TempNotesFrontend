@@ -246,6 +246,8 @@ main.light {
   position: fixed;
   bottom: 20px;
   right: 25px;
+}
+.add-note-button__internal-container {
   font-weight: 700;
   font-size: 30px;
   padding: 6px 12px 10px;
@@ -254,13 +256,13 @@ main.light {
   cursor: pointer;
   background: linear-gradient(45deg, hsl(319, 82%, 52%) 0%, hsl(0, 94%, 52%) 100%) var(--x, 0)/200%;
 }
-.add-note-button.dark {
+.add-note-button__internal-container.dark {
   color: #202124;
 }
-.add-note-button.light {
+.add-note-button__internal-container.light {
   color: #FFF;
 }
-.add-note-button:hover {
+.add-note-button__internal-container:hover {
   --x: 80%;
 }
 
