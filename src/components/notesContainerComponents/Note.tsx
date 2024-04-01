@@ -1,7 +1,7 @@
 import { useThemeColor } from "@/hooks/hooks"
 import { TypeNote } from "@/types"
 
-const Note = ({id, title, description, expirationDate}: TypeNote) => {
+const Note = ({title, description, expirationDate}:  Omit<TypeNote, "id">) => {
   const themeColor = useThemeColor()
   return (
     <div className={'note ' + themeColor}>

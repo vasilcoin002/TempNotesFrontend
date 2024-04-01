@@ -13,6 +13,7 @@ import { Toaster } from './components/ui/toaster';
 function App() {
     return (
         <Wrapper>
+            {/* Create autosave of notes for some time */}
             <Header>
                 <ChangeThemeButton/>
                 {/* TODO create search note input */}

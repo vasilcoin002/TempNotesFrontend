@@ -11,7 +11,7 @@ const EditNoteButton = ({id, title, description, expirationDate}: TypeNote) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className={"note-container rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 " + themeColor}>
-        <Note id={id} title={title} description={description} expirationDate={expirationDate}/>
+        <Note title={title} description={description} expirationDate={expirationDate}/>
       </DialogTrigger>
       <EditNoteDialogContent 
         id={id} 

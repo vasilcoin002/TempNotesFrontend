@@ -55,7 +55,7 @@ const checkNoteArgs = ({title, description, isExpirationDateDisabled, expiration
   return true
 }
 
-const saveNote = (
+const handleSave = (
   {noteId, title, description, isExpirationDateDisabled, expirationDate, saveFn}: TypeSaveNoteProps
 ) => {
   if (checkNoteArgs({title, description, isExpirationDateDisabled, expirationDate})) {
@@ -139,7 +139,7 @@ const NoteDialogContent = ({
       </div>
       <DialogFooter className={themeColor}>
         <Button 
-            onClick={() => saveNote({noteId, title, description, isExpirationDateDisabled, expirationDate, saveFn})}>
+            onClick={() => handleSave({noteId, title, description, isExpirationDateDisabled, expirationDate, saveFn})}>
           Save
         </Button>
       </DialogFooter>
