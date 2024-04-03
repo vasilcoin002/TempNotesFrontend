@@ -5,9 +5,11 @@ import EditNoteDialogContent from './editNoteDialogContent';
 import { useState } from 'react';
 import Note from '../notesContainerComponents/Note';
 
+
 const EditNoteButton = ({id, title, description, expirationDate}: TypeNote) => {
   const themeColor = useThemeColor()
   const [open, setOpen] = useState<boolean>(false)
+  // TODO create the context menu in which you can select the note for deleting or instantly delete it
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className={"note-container rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 " + themeColor}>

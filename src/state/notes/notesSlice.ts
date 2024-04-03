@@ -1,3 +1,4 @@
+import { notesService } from "@/services/notesService"
 import { TypeNote, TypeNotesStateError, TypeNotesStateStatus } from "@/types"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
@@ -31,16 +32,32 @@ export const notesSlice = createSlice({
     .addCase(fetchUserNotes.rejected, (state, action) => {
       state.notes = []
       state.status = "error"
-      state.error = action.payload? action.payload.error : "unknown error"
+      state.error = action.payload ? action.payload.error : "unknown error"
     })
+    .addCase(updateUserNotesOrder.pending, (state, action) => {
+      state.notes = action.meta.arg
+      state.status = "isLoading"
+      state.error = null
+    })
+    .addCase(updateUserNotesOrder.fulfilled, (state) => {
+      state.status = "succeeded"
+    })
+    .addCase(updateUserNotesOrder.rejected, (state, action) => {
+      state.notes = action.payload? action.payload.notes : []
+      state.status = "succeeded"
+      state.error = action.payload ? action.payload.error : "unknown error"
+    })
+
+
 })
 
-type TypeThunkApiConfigFetchUserNotes = {
+type TypeThunkApiConfig = {
   rejectValue: TypeNotesState,
   fulfillValue: TypeNotesState,
+  state: TypeNotesState,
 }
 
-export const fetchUserNotes = createAsyncThunk<TypeNotesState, void, TypeThunkApiConfigFetchUserNotes>(
+export const fetchUserNotes = createAsyncThunk<TypeNotesState, void, TypeThunkApiConfig>(
   "notes/fetchUserNotesByUserId",
   async (_, thunkAPI) => {
     try {
@@ -50,6 +67,20 @@ export const fetchUserNotes = createAsyncThunk<TypeNotesState, void, TypeThunkAp
     }
     catch {
       return thunkAPI.rejectWithValue({notes: [], status: "error", error: "loading notes error"})
+    }
+  },
+)
+
+export const updateUserNotesOrder = createAsyncThunk<TypeNotesState, TypeNote[], TypeThunkApiConfig>(
+  "notes/updateUserNotesOrderByNotesIdList",
+  async (newNotes, thunkAPI) => {
+    const oldNotes = thunkAPI.getState().notes
+    try {
+      await notesService.updateUserNotesOrder(newNotes.map((note) => note.id))
+      return thunkAPI.fulfillWithValue({notes: newNotes, status: "succeeded", error: null})
+    }
+    catch {
+      return thunkAPI.rejectWithValue({notes: oldNotes, status:"error", error: "updating user's notes order error"})
     }
   },
 )
