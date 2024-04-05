@@ -26,7 +26,6 @@ class NotesService {
     console.log([id, title, description, expirationDate]);
   }
 
-  // TODO if axios is not working there, so change on simple fetch() function
   async updateUserNotesOrder(newNotesIdList: string[]) {
     try {
       const response = await axios.put(
@@ -41,8 +40,6 @@ class NotesService {
       return e
     }
   }
-
-
 
   getCheckingOfNoteArgs(
     title: string,

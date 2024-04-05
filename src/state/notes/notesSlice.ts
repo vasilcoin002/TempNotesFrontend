@@ -44,7 +44,7 @@ export const notesSlice = createSlice({
     })
     .addCase(updateUserNotesOrder.rejected, (state, action) => {
       state.notes = action.payload? action.payload.notes : []
-      state.status = "succeeded"
+      state.status = "error"
       state.error = action.payload ? action.payload.error : "unknown error"
     })
 

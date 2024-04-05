@@ -1,7 +1,8 @@
-import { useUserNotes } from "@/hooks/hooks";
+import { useAppDispatch, useUserNotes } from "@/hooks/hooks";
 import EditNoteButton from "../editNote/editNoteButton";
 import {
   DndContext,
+  DragEndEvent,
   KeyboardSensor,
   PointerSensor,
   closestCenter,
@@ -10,14 +11,15 @@ import {
 } from "@dnd-kit/core";
 import {
   SortableContext,
+  arrayMove,
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
+import { updateUserNotesOrder } from "@/state/notes/notesSlice";
 
 // FIXME restrict the screen of draging notes, because it can be grabbed beyond body
 // FIXME fix the bug with disappeared addNoteButton
-// FIXME If drag of note was triggered ocasionally, then don't send request to backend
-// FIXME make the replacing of notes working instead of just dragging them
 const SucceededNotes = () => {
+  const dispatch = useAppDispatch()
   const { notes } = useUserNotes();
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -25,17 +27,29 @@ const SucceededNotes = () => {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (active.id !== over?.id) {
+      const getRes = () => {
+        const oldIndex = notes.findIndex((note) => note.id === active.id);
+        const newIndex = notes.findIndex((note) => note.id === (over ? over.id : active.id));
+        return arrayMove(notes, oldIndex, newIndex);
+      }
+      const res = getRes()
+      dispatch(updateUserNotesOrder(res))
+    }
+  };
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCenter}>
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext items={notes}>
-        {notes.map((note) => (
-          <EditNoteButton
+        {notes.map((note) => <EditNoteButton
+            key={note.id}
             id={note.id}
             title={note.title}
             description={note.description}
             expirationDate={note.expirationDate}
           />
-        ))}
+        )}
       </SortableContext>
     </DndContext>
   );
