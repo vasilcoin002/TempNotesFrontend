@@ -1,5 +1,4 @@
 import axios from "axios";
-import { TypeNote } from "@/types";
 
 class NotesService {
   private urlGetUserNotes =
