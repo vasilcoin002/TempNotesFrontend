@@ -9,8 +9,12 @@ $text-color-dark: $bg-color-light
 $text-color-gradient: linear-gradient(45deg, hsla(319, 82%, 52%, 1) 0%, hsla(0, 94%, 52%, 1) 100%)
 $height-calendar-title: 40px
 
+html, body
+  height: 100%
+
+
 body
-  flex: 1 0 2000px
+  // flex: 1 0 2000px
   position: relative
   font-family: system-ui, sans-serif
 
@@ -42,6 +46,7 @@ header
 
 main
   transition: 0.15s
+  flex: 1 1 auto
   &.dark
     background: $bg-color-dark
   &.light
@@ -168,7 +173,7 @@ main
     &.light
       color: $bg-color-light
     // gradient text color
-      background: $text-color-gradient var(--x, 0)/ 200%
+    background: $text-color-gradient var(--x, 0)/ 200%
     &:hover
       --x: 80%
 

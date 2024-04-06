@@ -20,6 +20,7 @@ const Note = ({title, description, expirationDate, attributes, listeners,}: Prop
           alt="dots-menu"
           {...attributes}
           {...listeners}
+          tabIndex={-1}
         />
       </div>
       <div className='note__text-container'>

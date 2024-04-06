@@ -3,7 +3,7 @@ import { Button } from "../ui/button"
 import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog"
 import { Textarea } from "../ui/textarea"
 import { Input } from "../ui/input"
-import { useEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { notesService } from "@/services/notesService"
 import { toast } from "../ui/use-toast"
 import CalendarButton from "./calendarButton"
@@ -83,7 +83,7 @@ const NoteDialogContent = ({
   saveFn,
   open: isDialogWindowOpened,
 }: TypeNoteDialogContentProps) => {
-  // FIXME fix the scrolling down of the page after clothing dialog window
+  const scrollRef = useRef(0);
   const themeColor = useThemeColor()
   const [title, setTitle] = useState<string>(initialTitle)
   const [description, setDescription] = useState<string>(initialDescription)
@@ -100,6 +100,13 @@ const NoteDialogContent = ({
       setExpirationDate(getExpirationDateFromString(initialExpirationDate))
     }
   }, [isDialogWindowOpened])
+
+  useEffect(() => {
+    if (!isDialogWindowOpened) {
+      scrollRef.current = window.scrollY
+      window.scrollTo(0, scrollRef.current)
+    }
+  }, [window.scrollY])
 
   return (
     <DialogContent className={themeColor}>

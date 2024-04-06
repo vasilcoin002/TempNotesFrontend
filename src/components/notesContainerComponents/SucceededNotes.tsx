@@ -14,10 +14,9 @@ import {
   arrayMove,
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
+import { restrictToWindowEdges } from "@dnd-kit/modifiers"
 import { updateUserNotesOrder } from "@/state/notes/notesSlice";
 
-// FIXME restrict the screen of draging notes, because it can be grabbed beyond body
-// FIXME fix the bug with disappeared addNoteButton
 const SucceededNotes = () => {
   const dispatch = useAppDispatch()
   const { notes } = useUserNotes();
@@ -40,7 +39,7 @@ const SucceededNotes = () => {
     }
   };
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+    <DndContext modifiers={[restrictToWindowEdges]} sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext items={notes}>
         {notes.map((note) => <EditNoteButton
             key={note.id}
