@@ -5,6 +5,7 @@ class NotesService {
     "http://localhost:8080/api/v1/notes/userNotes?userId=";
   private userId = "65df98471e44df48ce57c60f";
 
+  // TODO connect getUserNotes in notesService to notesSlice
   async getUserNotes(userId: string) {
     // const {data} = await axios.get<TypeNote[]>(this.urlGetUserNotes + userId)
     const data = await fetch(this.urlGetUserNotes + userId);
@@ -13,32 +14,32 @@ class NotesService {
 
   // TODO make the addUserNote method work
   async addUserNote(title: string, description: string, expirationDate?: Date) {
-    console.log([title, description, expirationDate]);
+    const responce = await axios.post(
+      "http://localhost:8080/api/v1/notes",
+      {
+        userId: this.userId,
+        title,
+        description,
+        expirationDate: expirationDate ? this.getStringFromExpirationDate(expirationDate) : undefined,
+      }
+    )
+    return responce.data
   }
 
   // TODO make the updateUserNote method work
-  async updateUserNote(
-    id: string,
-    title: string,
-    description: string,
-    expirationDate?: Date
-  ) {
+  async updateUserNote(id: string, title: string, description: string, expirationDate?: Date) {
     console.log([id, title, description, expirationDate]);
   }
 
   async updateUserNotesOrder(newNotesIdList: string[]) {
-    try {
-      const response = await axios.put(
-        "http://localhost:8080/api/v1/notes/updateUserNotesOrder",
-        {
-          userId: this.userId,
-          newNotesIdList,
-        }
-      );
-      return response.data;
-    } catch (e) {
-      return e
-    }
+    const response = await axios.put(
+      "http://localhost:8080/api/v1/notes/updateUserNotesOrder",
+      {
+        userId: this.userId,
+        newNotesIdList,
+      }
+    );
+    return response.data;
   }
 
   getCheckingOfNoteArgs(
@@ -73,6 +74,14 @@ class NotesService {
       return state;
     }
     return state;
+  }
+
+  getStringFromExpirationDate = (date: Date) => {
+    return date.getFullYear() + "-" + (String(date.getMonth() + 1).padStart(2, "0")) + "-" + String(date.getDate()).padStart(2, "0")
+  }
+
+  getExpirationDateFromString = (expirationDate: string | undefined) => {
+    return expirationDate ? new Date(expirationDate) : undefined
   }
 }
 

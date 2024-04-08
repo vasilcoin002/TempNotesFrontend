@@ -43,7 +43,20 @@ export const notesSlice = createSlice({
       state.status = "succeeded"
     })
     .addCase(updateUserNotesOrder.rejected, (state, action) => {
-      state.notes = action.payload? action.payload.notes : []
+      state.notes = []
+      state.status = "error"
+      state.error = action.payload ? action.payload.error : "unknown error"
+    })
+    .addCase(addUserNote.pending, (state) => {
+      state.status = "isLoading"
+    })
+    .addCase(addUserNote.fulfilled, (state, action) => {
+      state.notes = [...state.notes, ...action.payload.notes]
+      state.status = "succeeded"
+      state.error = null
+    })
+    .addCase(addUserNote.rejected, (state, action) => {
+      state.notes = []
       state.status = "error"
       state.error = action.payload ? action.payload.error : "unknown error"
     })
@@ -54,11 +67,10 @@ export const notesSlice = createSlice({
 type TypeThunkApiConfig = {
   rejectValue: TypeNotesState,
   fulfillValue: TypeNotesState,
-  state: TypeNotesState,
 }
 
 export const fetchUserNotes = createAsyncThunk<TypeNotesState, void, TypeThunkApiConfig>(
-  "notes/fetchUserNotesByUserId",
+  "notes/fetchUserNotes",
   async (_, thunkAPI) => {
     try {
       const responce = await fetch("http://localhost:8080/api/v1/notes/userNotes?userId=65df98471e44df48ce57c60f")
@@ -72,17 +84,33 @@ export const fetchUserNotes = createAsyncThunk<TypeNotesState, void, TypeThunkAp
 )
 
 export const updateUserNotesOrder = createAsyncThunk<TypeNotesState, TypeNote[], TypeThunkApiConfig>(
-  "notes/updateUserNotesOrderByNotesIdList",
+  "notes/updateUserNotesOrder",
   async (newNotes, thunkAPI) => {
-    const oldNotes = thunkAPI.getState().notes
     try {
       await notesService.updateUserNotesOrder(newNotes.map((note) => note.id))
       return thunkAPI.fulfillWithValue({notes: newNotes, status: "succeeded", error: null})
     }
     catch {
-      return thunkAPI.rejectWithValue({notes: oldNotes, status:"error", error: "updating user's notes order error"})
+      return thunkAPI.rejectWithValue({notes: [], status:"error", error: "updating user's notes order error"})
     }
   },
+)
+
+export const addUserNote = createAsyncThunk<TypeNotesState, TypeNote, TypeThunkApiConfig>(
+  "notes/addUserNote",
+  async (note, thunkAPI) => {
+    try {
+      const newNote = [await notesService.addUserNote(
+        note.title, 
+        note.description, 
+        note.expirationDate ? notesService.getExpirationDateFromString(note.expirationDate) : undefined, 
+      )]
+      return thunkAPI.fulfillWithValue({notes: newNote, status: "succeeded", error: null})
+    }
+    catch {
+      return thunkAPI.rejectWithValue({notes: [], status: "error", error: "adding user's note error"})
+    }
+  }
 )
 
 export default notesSlice.reducer 

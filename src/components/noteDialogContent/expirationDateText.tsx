@@ -1,4 +1,5 @@
 import { useThemeColor } from "@/hooks/hooks"
+import { notesService } from "@/services/notesService"
 
 type Props = {
   expirationDate: Date | undefined,
@@ -12,9 +13,6 @@ const isExpirationDateNeedsBeRendered = ({expirationDate, isExpirationDateDisabl
   return true
 }
 
-const getFormatedDate = (date: Date) => {
-  return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-}
 
 const ExpirationDateText = ({expirationDate, isExpirationDateDisabled}: Props) => {
   const themeColor = useThemeColor()
@@ -22,7 +20,7 @@ const ExpirationDateText = ({expirationDate, isExpirationDateDisabled}: Props) =
         <span className={"dialog-select-button " + themeColor}>
           {
             isExpirationDateNeedsBeRendered({expirationDate, isExpirationDateDisabled}) ? 
-            ("Expiration date: " + getFormatedDate(expirationDate as Date))
+            ("Expiration date: " + notesService.getStringFromExpirationDate(expirationDate as Date))
             :
             "No expiration date"
           }

@@ -1,15 +1,20 @@
-import { notesService } from "@/services/notesService"
+import { addUserNote } from "@/state/notes/notesSlice"
 import NoteDialogContent, { TypeSaveFn } from "../noteDialogContent/noteDialogContent"
+import { useAppDispatch } from "@/hooks/hooks"
+import { TypeNote } from "@/types"
 
 type Props = {
   open: boolean
 }
 
-// TODO make it through notesSlice
-const saveFn: TypeSaveFn = ({title, description, expirationDate}) => 
-    notesService.addUserNote(title, description, expirationDate)
-
 const AddNoteDialogContent = ({open}: Props) => {
+  const dispatch = useAppDispatch()
+  // TODO make it through notesSlice
+  const saveFn: TypeSaveFn = async ({title, description, expirationDate}) => {
+    const expirationDateString = expirationDate ? expirationDate.toString() : undefined
+    const note: TypeNote = {id: "",title, description,  expirationDate: expirationDateString}
+    await dispatch(addUserNote(note))
+  }
   return (
     <NoteDialogContent
       dialogTitle="Create your note" 

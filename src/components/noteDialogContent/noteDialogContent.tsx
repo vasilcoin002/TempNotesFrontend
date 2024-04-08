@@ -3,7 +3,7 @@ import { Button } from "../ui/button"
 import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog"
 import { Textarea } from "../ui/textarea"
 import { Input } from "../ui/input"
-import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { notesService } from "@/services/notesService"
 import { toast } from "../ui/use-toast"
 import CalendarButton from "./calendarButton"
@@ -69,10 +69,7 @@ const handleSave = (
   }
 }
 
-const getExpirationDateFromString = (expirationDate: string | undefined) => {
-  return expirationDate ? new Date(expirationDate) : undefined
-}
-
+// FIXME after adding or editing note, dialog window must be closed
 const NoteDialogContent = ({
   noteId,
   initialTitle, 
@@ -90,14 +87,14 @@ const NoteDialogContent = ({
   const [isExpirationDateDisabled, setIsExpirationDateDisabled] = 
       useState<boolean>(initialIsExpirationDateDisabled)
   const [expirationDate, setExpirationDate] = 
-      useState<Date | undefined>(getExpirationDateFromString(initialExpirationDate))
+      useState<Date | undefined>(notesService.getExpirationDateFromString(initialExpirationDate))
 
   useEffect(() => {
     if (isDialogWindowOpened) {
       setTitle(initialTitle)
       setDescription(initialDescription)
       setIsExpirationDateDisabled(initialIsExpirationDateDisabled)
-      setExpirationDate(getExpirationDateFromString(initialExpirationDate))
+      setExpirationDate(notesService.getExpirationDateFromString(initialExpirationDate))
     }
   }, [isDialogWindowOpened])
 
