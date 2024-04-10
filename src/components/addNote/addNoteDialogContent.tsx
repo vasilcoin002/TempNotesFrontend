@@ -9,7 +9,6 @@ type Props = {
 
 const AddNoteDialogContent = ({open}: Props) => {
   const dispatch = useAppDispatch()
-  // TODO make it through notesSlice
   const saveFn: TypeSaveFn = async ({title, description, expirationDate}) => {
     const expirationDateString = expirationDate ? expirationDate.toString() : undefined
     const note: TypeNote = {id: "",title, description,  expirationDate: expirationDateString}

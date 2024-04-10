@@ -1,5 +1,6 @@
 import { notesService } from "@/services/notesService"
 import { TypeNote, TypeNotesStateError, TypeNotesStateStatus } from "@/types"
+import { getFormattedExpirationStringOrUndefined } from "@/utils/DataTransformation"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 export type TypeNotesState = {
@@ -60,8 +61,21 @@ export const notesSlice = createSlice({
       state.status = "error"
       state.error = action.payload ? action.payload.error : "unknown error"
     })
-
-
+    .addCase(updateUserNote.pending, (state) => {
+      state.status = "isLoading"
+    })
+    .addCase(updateUserNote.fulfilled, (state, action) => {
+      const updatedNote = action.payload.data
+      const updatedNoteIndex = state.notes.findIndex((note) => note.id === updatedNote.id)
+      state.notes[updatedNoteIndex] = updatedNote
+      state.status = "succeeded"
+      state.error = null
+    })
+    .addCase(updateUserNote.rejected, (state, action) => {
+      state.notes = []
+      state.status = "error"
+      state.error = action.payload ? action.payload.error : "unknown error"
+    })
 })
 
 type TypeThunkApiConfig = {
@@ -103,9 +117,33 @@ export const addUserNote = createAsyncThunk<TypeNotesState, TypeNote, TypeThunkA
       const newNote = [await notesService.addUserNote(
         note.title, 
         note.description, 
-        note.expirationDate ? notesService.getExpirationDateFromString(note.expirationDate) : undefined, 
+        getFormattedExpirationStringOrUndefined(note.expirationDate),
       )]
       return thunkAPI.fulfillWithValue({notes: newNote, status: "succeeded", error: null})
+    }
+    catch {
+      return thunkAPI.rejectWithValue({notes: [], status: "error", error: "adding user's note error"})
+    }
+  }
+)
+
+export const updateUserNote = createAsyncThunk<TypeNotesState & {data: TypeNote}, TypeNote, TypeThunkApiConfig>(
+  "notes/updateUserNote",
+  async (note, thunkAPI) => {
+    try {
+      console.log(
+        note.id,
+        note.title,
+        note.description, 
+        getFormattedExpirationStringOrUndefined(note.expirationDate),
+      )
+      const newNote = await notesService.updateUserNote(
+        note.id,
+        note.title,
+        note.description, 
+        getFormattedExpirationStringOrUndefined(note.expirationDate),
+      )
+      return thunkAPI.fulfillWithValue({notes: [], status: "succeeded", error: null, data: newNote as TypeNote})
     }
     catch {
       return thunkAPI.rejectWithValue({notes: [], status: "error", error: "adding user's note error"})

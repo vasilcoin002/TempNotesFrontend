@@ -4,11 +4,12 @@ import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../ui/di
 import { Textarea } from "../ui/textarea"
 import { Input } from "../ui/input"
 import { useEffect, useRef, useState } from "react"
-import { notesService } from "@/services/notesService"
 import { toast } from "../ui/use-toast"
 import CalendarButton from "./calendarButton"
 import ExpirationDateSwitcher from "./expirationDateSwitcher"
 import ExpirationDateText from "./expirationDateText"
+import { getExpirationDateOrUndefinedFromString } from "@/utils/DataTransformation"
+import { getCheckingOfNoteArgs } from "@/utils/Checkings"
 
 type TypeNoteDialogContentProps = {
   noteId?: string,
@@ -45,7 +46,7 @@ type TypeSaveNoteProps = {
 }
 
 const checkNoteArgs = ({title, description, isExpirationDateDisabled, expirationDate}: TypeCheckNoteArgsProps) => {
-  const noteArgumentsCheck = notesService.getCheckingOfNoteArgs(
+  const noteArgumentsCheck = getCheckingOfNoteArgs(
     title, description, isExpirationDateDisabled, expirationDate
   )
   if (!noteArgumentsCheck.correct) {
@@ -59,7 +60,6 @@ const handleSave = (
   {noteId, title, description, isExpirationDateDisabled, expirationDate, saveFn}: TypeSaveNoteProps
 ) => {
   if (checkNoteArgs({title, description, isExpirationDateDisabled, expirationDate})) {
-    // TODO make the save button work
     saveFn({
       id: noteId, 
       title, 
@@ -87,14 +87,14 @@ const NoteDialogContent = ({
   const [isExpirationDateDisabled, setIsExpirationDateDisabled] = 
       useState<boolean>(initialIsExpirationDateDisabled)
   const [expirationDate, setExpirationDate] = 
-      useState<Date | undefined>(notesService.getExpirationDateFromString(initialExpirationDate))
+      useState<Date | undefined>(getExpirationDateOrUndefinedFromString(initialExpirationDate))
 
   useEffect(() => {
     if (isDialogWindowOpened) {
       setTitle(initialTitle)
       setDescription(initialDescription)
       setIsExpirationDateDisabled(initialIsExpirationDateDisabled)
-      setExpirationDate(notesService.getExpirationDateFromString(initialExpirationDate))
+      setExpirationDate(getExpirationDateOrUndefinedFromString(initialExpirationDate))
     }
   }, [isDialogWindowOpened])
 

@@ -1,5 +1,9 @@
 import { notesService } from "@/services/notesService"
 import NoteDialogContent, { TypeSaveFn } from "../noteDialogContent/noteDialogContent"
+import { useAppDispatch } from "@/hooks/hooks"
+import { TypeNote } from "@/types"
+import { updateUserNote } from "@/state/notes/notesSlice"
+import { getStringOrUndefinedFromExpirationDate } from "@/utils/DataTransformation"
 
 type Props = {
   id: string,
@@ -9,11 +13,18 @@ type Props = {
   open: boolean,
 }
 
-// TODO make it through notesSlice
-const saveFn: TypeSaveFn = ({id, title, description, expirationDate}) => 
-    notesService.updateUserNote(id as string, title, description, expirationDate)
-
 const EditNoteDialogContent = ({id, title, description, expirationDate, open}: Props) => {
+  const dispatch = useAppDispatch()
+  const saveFn: TypeSaveFn = async ({id, title, description, expirationDate}) => {
+    const expirationStringOrUndefined = getStringOrUndefinedFromExpirationDate(expirationDate)
+    const note: TypeNote = {
+      id: id as string, 
+      title, 
+      description,
+      expirationDate: expirationStringOrUndefined
+    }
+    await dispatch(updateUserNote(note))
+  }
   return (
     <NoteDialogContent
       dialogTitle="Edit note"
