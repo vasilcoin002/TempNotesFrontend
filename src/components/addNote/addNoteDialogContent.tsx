@@ -4,10 +4,11 @@ import { useAppDispatch } from "@/hooks/hooks"
 import { TypeNote } from "@/types"
 
 type Props = {
-  open: boolean
+  open: boolean,
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-const AddNoteDialogContent = ({open}: Props) => {
+const AddNoteDialogContent = ({open, setOpen}: Props) => {
   const dispatch = useAppDispatch()
   const saveFn: TypeSaveFn = async ({title, description, expirationDate}) => {
     const expirationDateString = expirationDate ? expirationDate.toString() : undefined
@@ -22,6 +23,7 @@ const AddNoteDialogContent = ({open}: Props) => {
       initialIsExpirationDateDisabled={true}
       saveFn={saveFn}
       open={open}
+      setOpen={setOpen}
     />
   )
 }

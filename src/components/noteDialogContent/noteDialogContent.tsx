@@ -20,6 +20,7 @@ type TypeNoteDialogContentProps = {
   dialogTitle: string,
   saveFn: TypeSaveFn,
   open: boolean,
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 export type TypeSaveFn = (note: {
@@ -42,7 +43,8 @@ type TypeSaveNoteProps = {
   description: string,
   isExpirationDateDisabled: boolean,
   expirationDate: Date | undefined,
-  saveFn: TypeSaveFn
+  saveFn: TypeSaveFn,
+  setIsDialogWindowOpened: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const checkNoteArgs = ({title, description, isExpirationDateDisabled, expirationDate}: TypeCheckNoteArgsProps) => {
@@ -57,7 +59,7 @@ const checkNoteArgs = ({title, description, isExpirationDateDisabled, expiration
 }
 
 const handleSave = (
-  {noteId, title, description, isExpirationDateDisabled, expirationDate, saveFn}: TypeSaveNoteProps
+  {noteId, title, description, isExpirationDateDisabled, expirationDate, saveFn, setIsDialogWindowOpened}: TypeSaveNoteProps
 ) => {
   if (checkNoteArgs({title, description, isExpirationDateDisabled, expirationDate})) {
     saveFn({
@@ -66,10 +68,10 @@ const handleSave = (
       description, 
       expirationDate: isExpirationDateDisabled ? undefined : expirationDate
     })
+    setIsDialogWindowOpened(false)
   }
 }
 
-// FIXME after adding or editing note, dialog window must be closed
 const NoteDialogContent = ({
   noteId,
   initialTitle, 
@@ -79,6 +81,7 @@ const NoteDialogContent = ({
   dialogTitle,
   saveFn,
   open: isDialogWindowOpened,
+  setOpen: setIsDialogWindowOpened
 }: TypeNoteDialogContentProps) => {
   const scrollRef = useRef(0);
   const themeColor = useThemeColor()
@@ -143,7 +146,7 @@ const NoteDialogContent = ({
       </div>
       <DialogFooter className={themeColor}>
         <Button 
-            onClick={() => handleSave({noteId, title, description, isExpirationDateDisabled, expirationDate, saveFn})}>
+            onClick={() => handleSave({noteId, title, description, isExpirationDateDisabled, expirationDate, saveFn, setIsDialogWindowOpened})}>
           Save
         </Button>
       </DialogFooter>

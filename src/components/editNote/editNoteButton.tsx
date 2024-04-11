@@ -29,6 +29,7 @@ const EditNoteButton = ({
           description={description}
           expirationDate={expirationDate}
           open={open}
+          setOpen={setOpen}
         />
       </Dialog>
   );

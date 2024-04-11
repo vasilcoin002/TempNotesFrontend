@@ -15,7 +15,7 @@ const AddNoteButton = () => {
           <span className="add-note-button__text">+</span>
         </div>
       </DialogTrigger>
-      <AddNoteDialogContent open={open}/>
+      <AddNoteDialogContent open={open} setOpen={setOpen}/>
     </Dialog>
   )
 }
