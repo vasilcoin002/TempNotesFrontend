@@ -1,15 +1,15 @@
+import { TypeNote } from "@/types";
 import axios from "axios";
 
 class NotesService {
-  private urlGetUserNotes =
-    "http://localhost:8080/api/v1/notes/userNotes?userId=";
   private userId = "65df98471e44df48ce57c60f";
 
   // TODO connect getUserNotes in notesService to notesSlice
-  async getUserNotes(userId: string) {
-    // const {data} = await axios.get<TypeNote[]>(this.urlGetUserNotes + userId)
-    const data = await fetch(this.urlGetUserNotes + userId);
-    return data.json();
+  async getUserNotes() {
+    const responce = await axios.get<TypeNote[]>(
+      "http://localhost:8080/api/v1/notes/userNotes?userId=" + this.userId
+    )
+    return responce.data;
   }
 
   async addUserNote(title: string, description: string, expirationDate?: string) {

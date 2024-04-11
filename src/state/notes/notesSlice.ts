@@ -87,8 +87,7 @@ export const fetchUserNotes = createAsyncThunk<TypeNotesState, void, TypeThunkAp
   "notes/fetchUserNotes",
   async (_, thunkAPI) => {
     try {
-      const responce = await fetch("http://localhost:8080/api/v1/notes/userNotes?userId=65df98471e44df48ce57c60f")
-      const data = await responce.json()
+      const data = await notesService.getUserNotes()
       return thunkAPI.fulfillWithValue({notes: data, status: "succeeded", error: null})
     }
     catch {
