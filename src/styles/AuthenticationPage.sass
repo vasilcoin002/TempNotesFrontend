@@ -1,0 +1,44 @@
+@import "../utils/variables"
+@import "../utils/mixins"
+
+.authentication
+  &-page
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    height: 100%
+  &-card
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 24px
+
+.input, .title
+  @include text-by-theme-color
+
+.title
+  font-size: 48px
+
+.input
+  font-size: 20px
+  width: 300px
+  &-block
+    display: flex
+    flex-direction: column
+    gap: 12px
+
+.alternative
+  &-block
+    display: flex
+    justify-content: space-between
+    padding: 0 12px
+  &-title
+    @include text-by-theme-color
+  &-link
+    color: #0067b8
+
+.submit-button
+  width: calc(100% - 16px)
+  font-size: 16px

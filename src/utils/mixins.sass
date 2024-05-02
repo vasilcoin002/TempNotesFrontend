@@ -1,0 +1,13 @@
+@import variables
+
+@mixin text-by-theme-color
+  &.dark
+    color: $text-color-dark
+  &.light
+    color: $text-color-light
+
+@mixin bg-by-theme-color
+  &.dark
+    background: $bg-color-dark
+  &.light
+    background: $bg-color-light

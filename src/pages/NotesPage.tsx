@@ -8,7 +8,6 @@ import {Toaster} from "@/components/ui/toaster.tsx";
 import "@/styles/NotesPage.css"
 
 const NotesPage = () => {
-  // TODO replace css code of notesPage from App.css to NotesPage.css
   return (
     <>
       {/* TODO Create auto-save of notes for some time */}

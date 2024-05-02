@@ -147,7 +147,9 @@ const NoteDialogContent = ({
       </div>
       <DialogFooter className={themeColor}>
         <Button 
-            onClick={() => handleSave({noteId, title, description, isExpirationDateDisabled, expirationDate, saveFn, setIsDialogWindowOpened})}>
+            onClick={() => handleSave(
+              {noteId, title, description, isExpirationDateDisabled, expirationDate, saveFn, setIsDialogWindowOpened}
+            )}>
           Save
         </Button>
       </DialogFooter>

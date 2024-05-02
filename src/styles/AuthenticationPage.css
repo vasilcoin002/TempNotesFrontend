@@ -1,0 +1,57 @@
+.authentication-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.authentication-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.input.dark, .title.dark {
+  color: #FFF;
+}
+.input.light, .title.light {
+  color: #202124;
+}
+
+.title {
+  font-size: 48px;
+}
+
+.input {
+  font-size: 20px;
+  width: 300px;
+}
+.input-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.alternative-block {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+.alternative-title.dark {
+  color: #FFF;
+}
+.alternative-title.light {
+  color: #202124;
+}
+.alternative-link {
+  color: #0067b8;
+}
+
+.submit-button {
+  width: calc(100% - 16px);
+  font-size: 16px;
+}
+
+/*# sourceMappingURL=AuthenticationPage.css.map */
