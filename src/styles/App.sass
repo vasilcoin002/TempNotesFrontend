@@ -1,0 +1,26 @@
+@import nullstyle
+@import "../utils/variables"
+
+
+html, body
+  height: 100%
+
+
+body
+  position: relative
+  font-family: system-ui, sans-serif
+
+::-webkit-scrollbar
+  display: none
+
+#root, .wrapper
+  height: 100%
+  width: 100%
+
+.wrapper
+  position: relative
+  transition: 0.15s
+  &.dark
+    background: $bg-color-dark
+  &.light
+    background: $bg-color-light

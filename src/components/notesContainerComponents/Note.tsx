@@ -14,7 +14,8 @@ const Note = ({title, description, expirationDate, attributes, listeners,}: Prop
     <div className={'note ' + themeColor}>
       <div className='note__text-container note__text-container__two-items'>
         <h3 className={"note__text note__title " + themeColor}>{title}</h3>
-        <img 
+        {/* TODO change the cursor from current to "move" on hover */}
+        <img
           className={"note-dots-menu " + themeColor} 
           src={"/dots-menu_" + themeColor + ".png"} 
           alt="dots-menu"

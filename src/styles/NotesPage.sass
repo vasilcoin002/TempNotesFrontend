@@ -1,37 +1,4 @@
-@import nullstyle
-
-$border-color-light: #e0e0e0
-$border-color-dark: rgba(255, 255, 255, .3)
-$bg-color-light: #FFF
-$bg-color-dark: #202124
-$text-color-light: $bg-color-dark
-$text-color-dark: $bg-color-light
-$text-color-gradient: linear-gradient(45deg, hsla(319, 82%, 52%, 1) 0%, hsla(0, 94%, 52%, 1) 100%)
-$height-calendar-title: 40px
-
-html, body
-  height: 100%
-
-
-body
-  // flex: 1 0 2000px
-  position: relative
-  font-family: system-ui, sans-serif
-
-::-webkit-scrollbar
-  display: none
-
-#root, .wrapper
-  height: 100%
-  width: 100%
-
-.wrapper
-  position: relative
-  transition: 0.15s
-  &.dark
-    background: $bg-color-dark
-  &.light
-    background: $bg-color-light
+@import "../utils/variables"
 
 header
   transition: 0.15s
@@ -155,6 +122,7 @@ main
   &__title.light, &__description.light
     color: $text-color-light
 
+// FIXME place the "+" in the middle
 .add-note-button
   display: flex
   position: fixed

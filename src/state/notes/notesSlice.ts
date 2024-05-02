@@ -145,7 +145,7 @@ export const updateUserNote = createAsyncThunk<TypeNotesState & {data: TypeNote}
       return thunkAPI.fulfillWithValue({notes: [], status: "succeeded", error: null, data: newNote as TypeNote})
     }
     catch {
-      return thunkAPI.rejectWithValue({notes: [], status: "error", error: "adding user's note error"})
+      return thunkAPI.rejectWithValue({notes: [], status: "error", error: "updating user's note error"})
     }
   }
 )

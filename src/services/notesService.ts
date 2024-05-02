@@ -1,49 +1,70 @@
-import { TypeNote } from "@/types";
+import {TypeNote} from "@/types";
 import axios from "axios";
+import {authenticationService} from "@/services/authenticationService.ts";
 
 class NotesService {
-  private userId = "65df98471e44df48ce57c60f";
 
-  // TODO connect getUserNotes in notesService to notesSlice
   async getUserNotes() {
-    const responce = await axios.get<TypeNote[]>(
-      "http://localhost:8080/api/v1/notes/userNotes?userId=" + this.userId
+    const response = await axios.get<TypeNote[]>(
+      "http://localhost:8080/api/v1/notes/getNotes",
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + authenticationService.getAccessToken(),
+        },
+      }
     )
-    return responce.data;
+    return response.data;
   }
 
   async addUserNote(title: string, description: string, expirationDate?: string) {
-    const responce = await axios.post(
-      "http://localhost:8080/api/v1/notes",
+    const response = await axios.post(
+      "http://localhost:8080/api/v1/notes/addNote",
       {
-        userId: this.userId,
         title,
         description,
         expirationDate,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + authenticationService.getAccessToken(),
+        },
       }
     )
-    return responce.data
+    return response.data
   }
 
   async updateUserNote(id: string, title: string, description: string, expirationDate?: string) {
-    const responce = await axios.put(
-      "http://localhost:8080/api/v1/notes/note",
+    const response = await axios.put(
+      "http://localhost:8080/api/v1/notes/updateNote",
       {
         id,
         title,
         description,
         expirationDate,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + authenticationService.getAccessToken(),
+        },
       }
     )
-    return responce.data
+    return response.data
   }
 
   async updateUserNotesOrder(newNotesIdList: string[]) {
     const response = await axios.put(
       "http://localhost:8080/api/v1/notes/updateUserNotesOrder",
       {
-        userId: this.userId,
-        newNotesIdList,
+        notesIdList: newNotesIdList,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + authenticationService.getAccessToken(),
+        },
       }
     );
     return response.data;

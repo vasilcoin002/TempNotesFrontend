@@ -3,7 +3,7 @@ import { Button } from "../ui/button"
 import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog"
 import { Textarea } from "../ui/textarea"
 import { Input } from "../ui/input"
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { toast } from "../ui/use-toast"
 import CalendarButton from "./calendarButton"
 import ExpirationDateSwitcher from "./expirationDateSwitcher"
@@ -52,7 +52,7 @@ const checkNoteArgs = ({title, description, isExpirationDateDisabled, expiration
     title, description, isExpirationDateDisabled, expirationDate
   )
   if (!noteArgumentsCheck.correct) {
-    toast({title: "Error has occured", description: noteArgumentsCheck.error})
+    toast({title: "Error has occurred", description: noteArgumentsCheck.error})
     return false
   }
   return true
@@ -72,6 +72,7 @@ const handleSave = (
   }
 }
 
+// TODO do the saving of note, when dialog window closes
 const NoteDialogContent = ({
   noteId,
   initialTitle, 
