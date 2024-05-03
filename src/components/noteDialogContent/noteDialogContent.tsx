@@ -73,6 +73,7 @@ const handleSave = (
 }
 
 // TODO do the saving of note, when dialog window closes
+// FIXME change UseStates on UseRefs like in AuthenticationPage
 const NoteDialogContent = ({
   noteId,
   initialTitle, 

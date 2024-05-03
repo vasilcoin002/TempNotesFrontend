@@ -10,7 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
 }
 
 .input.dark, .title.dark {
@@ -36,8 +36,12 @@
 
 .alternative-block {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   padding: 0 12px;
+}
+.alternative-row {
+  display: flex;
+  justify-content: space-between;
 }
 .alternative-title.dark {
   color: #FFF;

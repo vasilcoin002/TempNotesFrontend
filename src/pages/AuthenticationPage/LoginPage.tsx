@@ -1,33 +1,23 @@
-import {Input} from "@/components/ui/input.tsx";
 import {useThemeColor} from "@/hooks/hooks.ts";
 import "@/styles/AuthenticationPage.css"
-import {Button} from "@/components/ui/button.tsx";
-import React from "react";
+import AuthenticationPage from "@/components/authentication/AuthenticationPage.tsx";
 
-const registerButtonHandler = (e: React.MouseEvent) => {
-  e.preventDefault()
-}
-
+// TODO link authFn to LoginPage
+// TODO make the create account and forgot password links work
 // TODO refactor it to the AuthenticationPage and make it reusable to allow RegisterPage and LoginPage implement AuthenticationPage
 const LoginPage = () => {
   const themeColor = useThemeColor()
   return (
-    <div className={"authentication-page " + themeColor}>
-      <form className="authentication-card">
-        <h1 className={"title " + themeColor}>Sign in</h1>
-        <div className="input-block">
-          <Input type={"email"} placeholder={"Email"} className={"input " + themeColor}/>
-          <Input type={"password"} placeholder={"Password"} className={"input " + themeColor}/>
-          <div className={"alternative-block " + themeColor}>
-            <p className={"alternative-title " + themeColor}>No account?</p>
-            <a href="" className={"alternative-link " + themeColor}
-               onClick={e => registerButtonHandler(e)}
-            >Create one!</a>
-          </div>
-        </div>
-        <Button variant={"default"} type={"submit"} className={"submit-button " + themeColor}>Submit</Button>
-      </form>
-    </div>
+    <AuthenticationPage authFn={(email, password) => {console.log(email, password)}} title={"Sign in"} alternativeBlock={
+      <div className="alternative-row">
+        <a href="" className={"alternative-link " + themeColor}
+           onClick={() => null}
+        >Create account</a>
+        <a href="" onClick={() => null}
+           className={"alternative-link " + themeColor}
+        >Forgot password?</a>
+      </div>
+    }/>
   );
 };
 
