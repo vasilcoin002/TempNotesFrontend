@@ -40,8 +40,22 @@
   &-title
     @include text-by-theme-color
   &-link
-    color: #0067b8
+    color: $link-color
 
 .submit-button
   width: calc(100% - 16px)
   font-size: 16px
+
+.error
+  &-block
+    background: $authentication-error-bg
+    border-radius: 4px
+    opacity: 0.5
+    width: calc(100% - 16px)
+    height: 30px
+    display: flex
+    justify-content: center
+    align-items: center
+    font-size: 16px
+    font-weight: 700
+    color: $text-color-dark

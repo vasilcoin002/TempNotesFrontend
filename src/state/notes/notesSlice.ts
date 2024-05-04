@@ -1,12 +1,12 @@
 import { notesService } from "@/services/notesService"
-import { TypeNote, TypeNotesStateError, TypeNotesStateStatus } from "@/types"
+import { TypeNote, TypeStateError, TypeStateStatus } from "@/types"
 import { getFormattedExpirationStringOrUndefined } from "@/utils/DataTransformation"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 export type TypeNotesState = {
   notes: TypeNote[],
-  status: TypeNotesStateStatus,
-  error: TypeNotesStateError,
+  status: TypeStateStatus,
+  error: TypeStateError,
 }
 
 const initialState:TypeNotesState = {

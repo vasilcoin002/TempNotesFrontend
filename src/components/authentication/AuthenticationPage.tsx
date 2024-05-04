@@ -1,6 +1,6 @@
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
-import {useThemeColor} from "@/hooks/hooks.ts";
+import {useAppSelector, useThemeColor} from "@/hooks/hooks.ts";
 import {ReactNode, useRef} from "react";
 import "@/styles/AuthenticationPage.css"
 
@@ -10,12 +10,12 @@ type Props = {
   authFn: (email: string, password: string) => void
 }
 
-// TODO create RegistrationPage with reusable AuthenticationPage
 // TODO add email and password validation
 // TODO add error handling(like "provided wrong data")
 // TODO add outline on alternative links when they selected on tab
 const AuthenticationPage = ({alternativeBlock, title, authFn}: Props) => {
   const themeColor = useThemeColor()
+  const error = useAppSelector(state => state.authentication.error)
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const getEmail = () => emailRef.current ? emailRef.current.value : ""
@@ -33,9 +33,12 @@ const AuthenticationPage = ({alternativeBlock, title, authFn}: Props) => {
         </div>
         <Button variant={"default"} type={"submit"} className={"submit-button " + themeColor}
                 onClick={e => {
-                    e.preventDefault()
-                    authFn(getEmail(), getPassword())
-        }}>Submit</Button>
+                  e.preventDefault()
+                  authFn(getEmail(), getPassword())
+                }}>Submit</Button>
+        {error &&
+					<div className="error-block"><p>{error}</p></div>
+        }
       </form>
     </div>
   );

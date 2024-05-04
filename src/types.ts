@@ -5,6 +5,11 @@ export type TypeNote = {
     expirationDate?: string,
 }
 
+export type TypeAuthenticationRequest = {
+  email: string,
+  password: string,
+}
+
 export type TypeThemeColor = "dark" | "light"
-export type TypeNotesStateStatus = "isLoading" | "error" | "succeeded"
-export type TypeNotesStateError = null | string
+export type TypeStateStatus = "isLoading" | "error" | "succeeded"
+export type TypeStateError = null | string
