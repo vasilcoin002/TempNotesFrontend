@@ -2,6 +2,7 @@ import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useThemeColor} from "@/hooks/hooks.ts";
 import {ReactNode, useRef} from "react";
+import "@/styles/AuthenticationPage.css"
 
 type Props = {
   alternativeBlock?: ReactNode,

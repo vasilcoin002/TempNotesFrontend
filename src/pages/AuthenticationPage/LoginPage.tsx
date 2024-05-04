@@ -1,5 +1,4 @@
 import {useThemeColor} from "@/hooks/hooks.ts";
-import "@/styles/AuthenticationPage.css"
 import AuthenticationPage from "@/components/authentication/AuthenticationPage.tsx";
 
 // TODO link authFn to LoginPage
