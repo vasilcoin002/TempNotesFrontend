@@ -23,8 +23,6 @@ class AuthenticationService {
         }
       }
     )
-    console.log(response)
-    console.log(response.data)
 
     return response.data
   }
@@ -42,8 +40,6 @@ class AuthenticationService {
         }
       }
     )
-    console.log(response)
-    console.log(response.data)
 
     return response.data
   }

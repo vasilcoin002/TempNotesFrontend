@@ -3,13 +3,13 @@ import {TypeAuthenticationRequest, TypeStateError, TypeStateStatus} from "@/type
 import {authenticationService} from "@/services/authenticationService.ts";
 
 export type TypeAuthenticationState = {
-  accessToken: string | undefined,
+  isUserAuthenticated: boolean,
   status: TypeStateStatus,
   error: TypeStateError,
 }
 
 const initialState: TypeAuthenticationState = {
-  accessToken: undefined,
+  isUserAuthenticated: false,
   status: "isLoading",
   error: null
 }
@@ -23,30 +23,29 @@ export const authenticationSlice = createSlice(
       .addCase(loginUser.pending, (state) => {
         state.status = "isLoading"
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.accessToken = action.payload.accessToken
+      .addCase(loginUser.fulfilled, (state) => {
+        state.isUserAuthenticated = true
         state.status = "succeeded"
         state.error = null
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.accessToken = undefined
+        state.isUserAuthenticated = false
         state.status = "error"
         state.error = action.payload ? action.payload.error : "unknown error"
       })
       .addCase(registerUser.pending, (state) => {
         state.status = "isLoading"
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.accessToken = action.payload.accessToken
+      .addCase(registerUser.fulfilled, (state) => {
+        state.isUserAuthenticated = true
         state.status = "succeeded"
         state.error = null
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.accessToken = undefined
+        state.isUserAuthenticated = false
         state.status = "error"
         state.error = action.payload ? action.payload.error : "unknown error"
       })
-
   }
 )
 
@@ -62,10 +61,10 @@ export const loginUser = createAsyncThunk<TypeAuthenticationState, TypeAuthentic
       const response = await authenticationService.loginUser(authenticationRequest)
       const accessToken = response.accessToken
       authenticationService.setAccessToken(accessToken)
-      return thunkAPI.fulfillWithValue({accessToken, status: "succeeded", error: null})
+      return thunkAPI.fulfillWithValue({isUserAuthenticated: true, status: "succeeded", error: null})
     }
     catch (e) {
-      return thunkAPI.rejectWithValue({accessToken: undefined, status: "error", error: "login error"})
+      return thunkAPI.rejectWithValue({isUserAuthenticated: false, status: "error", error: "login error"})
     }
   }
 )
@@ -77,10 +76,10 @@ export const registerUser = createAsyncThunk<TypeAuthenticationState, TypeAuthen
       const response = await authenticationService.registerUser(authenticationRequest)
       const accessToken = response.accessToken
       authenticationService.setAccessToken(accessToken)
-      return thunkAPI.fulfillWithValue({accessToken, status: "succeeded", error: null})
+      return thunkAPI.fulfillWithValue({isUserAuthenticated: true, status: "succeeded", error: null})
     }
     catch (e) {
-      return thunkAPI.rejectWithValue({accessToken: undefined, status: "error", error: "register error"})
+      return thunkAPI.rejectWithValue({isUserAuthenticated: false, status: "error", error: "register error"})
     }
   }
 )
