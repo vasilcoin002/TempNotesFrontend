@@ -1,12 +1,12 @@
 import './styles/shadcn.css'
 import './styles/App.css'
 import Wrapper from './components/bodySubComponents/Wrapper';
-import LoginPage from "@/pages/AuthenticationPage/LoginPage.tsx";
+import RegisterPage from "@/pages/AuthenticationPage/RegisterPage.tsx";
 
 function App() {
     return (
         <Wrapper>
-          <LoginPage/>
+          <RegisterPage/>
         </Wrapper>
     )
 }

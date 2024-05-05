@@ -33,6 +33,20 @@ export const authenticationSlice = createSlice(
         state.status = "error"
         state.error = action.payload ? action.payload.error : "unknown error"
       })
+      .addCase(registerUser.pending, (state) => {
+        state.status = "isLoading"
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.accessToken = action.payload.accessToken
+        state.status = "succeeded"
+        state.error = null
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.accessToken = undefined
+        state.status = "error"
+        state.error = action.payload ? action.payload.error : "unknown error"
+      })
+
   }
 )
 
@@ -52,6 +66,21 @@ export const loginUser = createAsyncThunk<TypeAuthenticationState, TypeAuthentic
     }
     catch (e) {
       return thunkAPI.rejectWithValue({accessToken: undefined, status: "error", error: "login error"})
+    }
+  }
+)
+
+export const registerUser = createAsyncThunk<TypeAuthenticationState, TypeAuthenticationRequest, TypeThunkApiConfig>(
+  "authentication/registerUser",
+  async (authenticationRequest, thunkAPI) => {
+    try {
+      const response = await authenticationService.registerUser(authenticationRequest)
+      const accessToken = response.accessToken
+      authenticationService.setAccessToken(accessToken)
+      return thunkAPI.fulfillWithValue({accessToken, status: "succeeded", error: null})
+    }
+    catch (e) {
+      return thunkAPI.rejectWithValue({accessToken: undefined, status: "error", error: "register error"})
     }
   }
 )

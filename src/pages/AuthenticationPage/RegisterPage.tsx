@@ -1,10 +1,14 @@
-import {useThemeColor} from "@/hooks/hooks.ts";
+import {useAppDispatch, useThemeColor} from "@/hooks/hooks.ts";
 import AuthenticationPage from "@/components/authentication/AuthenticationPage.tsx";
+import {registerUser} from "@/state/authentication/authenticationSlice.ts";
 
 const RegisterPage = () => {
   const themeColor = useThemeColor()
+  const dispatch = useAppDispatch()
   return (
-    <AuthenticationPage authFn={(email, password) => {console.log(email, password)}} title={"Sign up"} alternativeBlock={
+		<AuthenticationPage authFn={
+      (email, password) => dispatch(registerUser({email, password}))
+    } title={"Sign up"} alternativeBlock={
       <div className="alternative-row">
         <a href="" className={"alternative-link " + themeColor}
            onClick={() => null}
