@@ -43,8 +43,6 @@ class AuthenticationService {
 
     return response.data
   }
-
-
 }
 
 export const authenticationService = new AuthenticationService();

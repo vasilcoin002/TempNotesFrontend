@@ -24,7 +24,8 @@ main.light {
 }
 
 .theme-image {
-  object-fit: fill;
+  -o-object-fit: fill;
+     object-fit: fill;
 }
 .theme-image.dark {
   width: 32px;
@@ -133,18 +134,14 @@ main.light {
 }
 .note__expiresAt {
   font-size: 16px;
-  margin-bottom: 5px;
-  font-weight: 700;
-  background: linear-gradient(45deg, hsl(319, 82%, 52%) 0%, hsl(0, 94%, 52%) 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  height: 20px;
 }
 .note:hover {
   cursor: pointer;
 }
 .note.dark {
   border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #556bc3;
 }
 .note.dark:hover {
   background: #323438;
@@ -154,6 +151,7 @@ main.light {
 }
 .note.light {
   border: 1px solid #e0e0e0;
+  color: #2a7768;
 }
 .note.light:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
@@ -171,12 +169,13 @@ main.light {
 }
 .add-note-button__internal-container {
   font-weight: 700;
-  font-size: 30px;
-  padding: 6px 12px 10px;
+  font-size: 24px;
+  height: 48px;
+  width: 48px;
   border-radius: 10px;
-  transition: 0.15s;
+  transition: 0.16s;
   cursor: pointer;
-  background: linear-gradient(45deg, hsl(319, 82%, 52%) 0%, hsl(0, 94%, 52%) 100%) var(--x, 0)/200%;
+  background: #c7afb0;
 }
 .add-note-button__internal-container.dark {
   color: #202124;
@@ -184,8 +183,40 @@ main.light {
 .add-note-button__internal-container.light {
   color: #FFF;
 }
-.add-note-button__internal-container:hover {
-  --x: 80%;
+.add-note-button__internal-container:hover.dark {
+  background: #556bc3;
+}
+.add-note-button__internal-container:hover.light {
+  background: #2a7768;
+}
+.add-note-button__text-block {
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.add-note-button__text-span {
+  border-radius: 4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.add-note-button__text-span.dark {
+  background: #202124;
+}
+.add-note-button__text-span.light {
+  background: #FFF;
+}
+.add-note-button__text-span.vertical {
+  height: 100%;
+  width: 20%;
+}
+.add-note-button__text-span.horizontal {
+  width: 100%;
+  height: 20%;
 }
 
 .dialog-fields-container {
@@ -263,6 +294,4 @@ main.light {
 }
 .dialog-switcher-label.dark {
   color: #FFF;
-}
-
-/*# sourceMappingURL=NotesPage.css.map */
+}/*# sourceMappingURL=NotesPage.css.map */
