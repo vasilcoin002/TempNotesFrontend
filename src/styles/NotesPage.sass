@@ -134,18 +134,15 @@ main
     height: 48px
     width: 48px
     border-radius: 10px
-    transition: 0.16s
+    transition: 0.2s
     cursor: pointer
     &.dark
       color: $bg-color-dark
     &.light
       color: $bg-color-light
-    background: $primary-color-dark
+    background: $secondary-color-dark
     &:hover
-      &.dark
-        background: $secondary-color-dark
-      &.light
-        background: $secondary-color-light
+      transform: scale(1.08)
   &__text
     &-block
       position: absolute
@@ -170,9 +167,6 @@ main
       &.horizontal
         width: 100%
         height: 20%
-      
-        
-
 
 .dialog
   &-fields-container

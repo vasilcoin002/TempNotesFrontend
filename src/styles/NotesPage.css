@@ -173,9 +173,9 @@ main.light {
   height: 48px;
   width: 48px;
   border-radius: 10px;
-  transition: 0.16s;
+  transition: 0.2s;
   cursor: pointer;
-  background: #c7afb0;
+  background: #556bc3;
 }
 .add-note-button__internal-container.dark {
   color: #202124;
@@ -183,11 +183,8 @@ main.light {
 .add-note-button__internal-container.light {
   color: #FFF;
 }
-.add-note-button__internal-container:hover.dark {
-  background: #556bc3;
-}
-.add-note-button__internal-container:hover.light {
-  background: #2a7768;
+.add-note-button__internal-container:hover {
+  transform: scale(1.08);
 }
 .add-note-button__text-block {
   position: absolute;
